@@ -28,7 +28,7 @@ const TAB_VIEW = [
         <li>React.js</li>
         <li>Next.js</li>
         <li>MySQL</li>
-        <li>Solidity</li>
+        {/* <li>Solidity</li> */}
       </ul>
     ),
   },
@@ -37,8 +37,8 @@ const TAB_VIEW = [
     id: "experience",
     content: (
       <ul className="list-disc pl-2">
-        <li>Associate Software Engineer, Exeve</li>
-        <li>Trainee Software Engineer, Avantrio</li>
+        <li>Associate Software Engineer, Exeve - 2 months</li>
+        <li>Trainee Software Engineer, Avantrio - 1 year</li>
       </ul>
     ),
   },
@@ -65,7 +65,7 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg ">
-            I&apos;m a Computer Science Undergraduate and a Software Engineer.
+            I&apos;m a Computer Science graduate and a Software Engineer.
             I&apos;m proficient in Java, Python and Solidity and front-end
             development using HTML, CSS, and JavaScript frameworks (React/Next)
             for creating responsive and user-friendly web applications. I am
