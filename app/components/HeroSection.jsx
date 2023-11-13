@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import React from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -12,7 +12,7 @@ const HeroSection = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
               Hello, I&apos;m
             </span>
-            <br/>
+            <br />
             <TypeAnimation
               sequence={[
                 // Same substring at the start will only be typed out once, initially
@@ -27,24 +27,30 @@ const HeroSection = () => {
               ]}
               wrapper="span"
               speed={50}
-            //   style={{ fontSize: "2em", display: "inline-block" }}
+              //   style={{ fontSize: "2em", display: "inline-block" }}
               repeat={Infinity}
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            Hello I&apos;m Kavindu! I&apos;m a recent{" "}
+            <span className="text-white">computer science</span> graduate with{" "}
+            <span className="text-white">1 year internship experience.</span> I
+            enjoy buulding web applications using
+            <span className="text-white"> React and Next.js.</span>
           </p>
           <div className="">
-            <button className="px-6 py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:bg-slate-200 text-white">
-              Contact me
-            </button>
+            <a href="mailto:kavindudealwis@gmail.com">
+              <button className="px-6 py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:bg-slate-200 text-white">
+                Contact me
+              </button>
+            </a>
+            <a href="/Kavindu_de_Alwis_Resume.pdf" download>
             <button className="px-1 py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:bg-slate-800 text-white mt-3">
               <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
                 Download CV
               </span>
             </button>
+            </a>
           </div>
         </div>
         <div className="col-span-5 place-self-center mt-12 lg:mt-0">

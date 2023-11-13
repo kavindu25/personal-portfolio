@@ -29,7 +29,7 @@ const projectData = [
     image: "images/projects/foodOrderApp.png",
     tag: ["All", "Web", "React"],
     gitUrl: "https://github.com/kavindu25/react-food-order-app",
-    previewUrl: "/",
+    previewUrl: "https://react-food-order-app-kavindu25.vercel.app/",
   },
   // {
   //   id: 4,
