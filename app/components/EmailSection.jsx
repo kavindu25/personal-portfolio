@@ -1,11 +1,12 @@
 "use client";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import GithubIcon from "../../public/github-icon.svg";
 import LinkedinIcon from "../../public/linkedin-icon.svg";
 
 const EmailSection = () => {
+  const [messageSubmitted, setMessageSubmitted] = useState();
   const handleMessageSubmit = async (event) => {
     event.preventDefault();
     const messageData = {
@@ -15,6 +16,8 @@ const EmailSection = () => {
     };
 
     console.log(messageData);
+    //todo
+    setMessageSubmitted(false);
     // const JSONData = JSON.stringify(messageData);
     // const endpoint = "/api/send";
 
@@ -31,7 +34,10 @@ const EmailSection = () => {
     // console.log(resData)
     // if (response.status === 200) {
     //   console.log("Message sent success");
-    // }
+    //   setMessageSubmitted(true);
+    // }else {
+    //   setMessageSubmitted(false);
+    //}
   };
   return (
     <section className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative">
@@ -63,7 +69,7 @@ const EmailSection = () => {
               Your Email
             </label>
             <input
-            name="email"
+              name="email"
               type="email"
               id="email"
               required
@@ -79,7 +85,7 @@ const EmailSection = () => {
               Subject
             </label>
             <input
-            name="subject"
+              name="subject"
               type="text"
               id="subject"
               required
@@ -107,6 +113,14 @@ const EmailSection = () => {
           >
             Send
           </button>
+          {messageSubmitted && (
+            <p className="text-green-500 text-sm mt-2">
+              Message sent successfully!
+            </p>
+          )}
+          {messageSubmitted === false && (
+            <p className="text-red-500 text-sm mt-2">Something went wrong!</p>
+          )}
         </form>
       </div>
     </section>
