@@ -1,17 +1,48 @@
-import React from "react";
+"use client";
+import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import GithubIcon from "../../public/github-icon.svg";
 import LinkedinIcon from "../../public/linkedin-icon.svg";
 
 const EmailSection = () => {
+  const handleMessageSubmit = async (event) => {
+    event.preventDefault();
+    const messageData = {
+      email: event.target.email.value,
+      subject: event.target.subject.value,
+      message: event.target.message.value,
+    };
+
+    console.log(messageData);
+    // const JSONData = JSON.stringify(messageData);
+    // const endpoint = "/api/send";
+
+    // const options = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSONData,
+    // };
+
+    // const response = await fetch(endpoint, options);
+    // const resData = await response.json();
+    // console.log(resData)
+    // if (response.status === 200) {
+    //   console.log("Message sent success");
+    // }
+  };
   return (
     <section className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative">
       <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-y-1/2"></div>
       <div className="z-10">
-        <h5 className="text-2xl font-bold text-white my-2">Let&apos;s connect!</h5>
+        <h5 className="text-2xl font-bold text-white my-2">
+          Let&apos;s connect!
+        </h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
-          I&apos;m currently looking for new opportunities, my inbox is always open.
+          I&apos;m currently looking for new opportunities, my inbox is always
+          open.
         </p>
         <div className="socials flex flex-row gap-2 ">
           <Link href="https://github.com/kavindu25">
@@ -23,7 +54,7 @@ const EmailSection = () => {
         </div>
       </div>
       <div className="z-10">
-        <form className="flex flex-col">
+        <form className="flex flex-col" onSubmit={handleMessageSubmit}>
           <div className="mb-6">
             <label
               htmlFor="email"
@@ -32,6 +63,7 @@ const EmailSection = () => {
               Your Email
             </label>
             <input
+            name="email"
               type="email"
               id="email"
               required
@@ -47,6 +79,7 @@ const EmailSection = () => {
               Subject
             </label>
             <input
+            name="subject"
               type="text"
               id="subject"
               required
