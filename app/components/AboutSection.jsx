@@ -42,14 +42,14 @@ const TAB_VIEW = [
       <ul className="list-disc pl-2">
         <li>
           Associate Software Engineer,{" "}
-          <a href="https://exeve.global/" target="_blank" className="hover:text-purple-400">
+          <a href="https://exeve.global/" target="_blank" className="text-primary-300 hover:text-primary-400">
             Exeve
           </a>{" "}
           - 2 months
         </li>
         <li>
           Trainee Software Engineer,{" "}
-          <a href="https://avantrio.xyz/" target="_blank" className="hover:text-purple-400">
+          <a href="https://avantrio.xyz/" target="_blank" className="text-primary-300 hover:text-primary-400">
             Avantrio
           </a>{" "}
           - 1 year
@@ -83,7 +83,7 @@ const AboutSection = () => {
             I recently graduated from Informatics Institute of Technology with a
             second upper class honours in Bsc(Computer Science). I completed my
             1 year internship at{" "}
-            <a href="https://avantrio.xyz/" target="_blank" className="hover:text-purple-400">
+            <a href="https://avantrio.xyz/" target="_blank" className="hover:text-primary-400">
               avantrio.
             </a>{" "}
             I&apos;m proficient in Java, Python and Solidity and front-end
