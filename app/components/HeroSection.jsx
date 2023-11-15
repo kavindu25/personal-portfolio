@@ -35,7 +35,7 @@ const HeroSection = () => {
             Hello I&apos;m Kavindu! I&apos;m a recent{" "}
             <span className="text-white">computer science</span> graduate with{" "}
             <span className="text-white">1 year internship experience.</span> I
-            enjoy buulding web applications using
+            enjoy building web applications using
             <span className="text-white"> React and Next.js.</span>
           </p>
           <div className="">
