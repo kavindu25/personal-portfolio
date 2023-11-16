@@ -20,9 +20,9 @@ const HeroSection = () => {
                 1000, // wait 1s before replacing "Mice" with "Hamsters"
                 "A CS Graduate",
                 1000,
-                "A Web Developer",
-                1000,
                 "A Software Engineer",
+                1000,
+                "A Web Developer",
                 1000,
               ]}
               wrapper="span"
