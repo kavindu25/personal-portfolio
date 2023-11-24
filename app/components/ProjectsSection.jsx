@@ -8,7 +8,7 @@ const projectData = [
   {
     id: 1,
     title: "Next.js Portfolio Website",
-    description: "Personal portfolio developed using Next.js",
+    description: "Personal portfolio developed using Next.js.",
     image: "images/projects/myPortfolio.png",
     tag: ["All", "Web", "Next"],
     gitUrl: "https://github.com/kavindu25/personal-portfolio",
@@ -17,7 +17,7 @@ const projectData = [
   {
     id: 2,
     title: "Weather App",
-    description: "Weatherapp with firebase login",
+    description: "Weatherapp with firebase login.",
     image: "images/projects/weatherApp.png",
     tag: ["All", "Web", "React"],
     gitUrl: "https://github.com/kavindu25/react-weatherapp",
@@ -26,21 +26,21 @@ const projectData = [
   {
     id: 3,
     title: "Food Order App",
-    description: "Demo food order app with checkout and forms",
+    description: "Demo food order app with checkout and forms.",
     image: "images/projects/foodOrderApp.png",
     tag: ["All", "Web", "React"],
     gitUrl: "https://github.com/kavindu25/react-food-order-app",
     previewUrl: "https://react-food-order-app-kavindu25.vercel.app/",
   },
-  // {
-  //   id: 4,
-  //   title: "Next.js Portfolio Website",
-  //   description: "My personal portfolio developed using Next.js",
-  //   image: "images/projects/myPortfolio.png",
-  //   tag: ["All"],
-  //   gitUrl: "/",
-  //   previewUrl: "/",
-  // },
+  {
+    id: 4,
+    title: "Next.js Travel App Landing Page",
+    description: "Responsive landing page for a travel app.",
+    image: "images/projects/travelApp.png",
+    tag: ["All", "Web", "Next"],
+    gitUrl: "https://github.com/kavindu25/nextjs-travel-app",
+    previewUrl: "https://nextjs-travel-app-kavindu25.vercel.app/",
+  },
 ];
 
 const ProjectsSection = () => {
