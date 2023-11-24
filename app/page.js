@@ -16,9 +16,9 @@ export default function Home() {
         {/* <AchievementsSection/> */}
         <AboutSection />
         <ProjectsSection />
-        <div className="text-white text-4xl text-center py-24">
+        {/* <div className="text-white text-4xl text-center py-24">
           More coming soon!
-        </div>
+        </div> */}
         <EmailSection />
       </div>
       <Footer />
