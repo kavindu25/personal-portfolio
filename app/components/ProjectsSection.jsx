@@ -50,6 +50,15 @@ const projectData = [
     gitUrl: "https://github.com/kavindu25/3d-tshirt-customizer",
     previewUrl: "https://3d-tshirt-customizer.vercel.app/",
   },
+  {
+    id: 6,
+    title: "Anime Hub",
+    description: "Next 14 App with server actions and infinite scroll.",
+    image: "images/projects/animeHub.png",
+    tag: ["All", "Web", "Next"],
+    gitUrl: "https://github.com/kavindu25/anime-hub",
+    previewUrl: "https://anime-hub-xi.vercel.app/",
+  },
 ];
 
 const ProjectsSection = () => {
