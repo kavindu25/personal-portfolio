@@ -51,7 +51,7 @@ const projectData = [
     previewUrl: "https://3d-tshirt-customizer.vercel.app/",
   },
   {
-    id: 5,
+    id: 6,
     title: "Anime Hub",
     description: "Next 14 App with server actions and infinite scroll.",
     image: "images/projects/animeHub.png",
