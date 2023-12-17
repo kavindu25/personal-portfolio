@@ -46,7 +46,7 @@ const projectData = [
     title: "3D T-shirt Customizer",
     description: "3D t-shirt customizer using three.js library.",
     image: "images/projects/shirtCustomizer.png",
-    tag: ["All", "Web", "Vite"],
+    tag: ["All", "Web", "React"],
     gitUrl: "https://github.com/kavindu25/3d-tshirt-customizer",
     previewUrl: "https://3d-tshirt-customizer.vercel.app/",
   },
@@ -101,11 +101,11 @@ const ProjectsSection = () => {
           name="Next"
           isSelected={tag === "Next"}
         />
-        <ProjectTag
+        {/* <ProjectTag
           onClick={handleTagChange}
           name="Vite"
           isSelected={tag === "Vite"}
-        />
+        /> */}
       </div>
       <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
         {filteredProjects.map((project, index) => {
