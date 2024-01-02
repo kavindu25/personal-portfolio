@@ -59,6 +59,15 @@ const projectData = [
     gitUrl: "https://github.com/kavindu25/anime-hub",
     previewUrl: "https://anime-hub-xi.vercel.app/",
   },
+  {
+    id: 7,
+    title: "E-commerce App - WIP",
+    description: "Next 14 E-commerce clone - WIP ",
+    image: "images/projects/ecommerceApp.png",
+    tag: ["All", "Web", "Next"],
+    gitUrl: "https://github.com/kavindu25/nextjs-ecommerce-clone",
+    previewUrl: "/",
+  },
 ];
 
 const ProjectsSection = () => {
