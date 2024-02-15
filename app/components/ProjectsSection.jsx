@@ -16,15 +16,6 @@ const projectData = [
   },
   {
     id: 2,
-    title: "Weather App",
-    description: "Weatherapp with firebase login.",
-    image: "images/projects/weatherApp.png",
-    tag: ["All", "Web", "React"],
-    gitUrl: "https://github.com/kavindu25/react-weatherapp",
-    previewUrl: "https://react-weatherapp-gamma.vercel.app/",
-  },
-  {
-    id: 3,
     title: "Food Order App",
     description: "Demo food order app with checkout and forms.",
     image: "images/projects/foodOrderApp.png",
@@ -33,7 +24,7 @@ const projectData = [
     previewUrl: "https://react-food-order-app-kavindu25.vercel.app/",
   },
   {
-    id: 4,
+    id: 3,
     title: "Next.js Travel App Landing Page",
     description: "Responsive landing page for a travel app.",
     image: "images/projects/travelApp.png",
@@ -42,7 +33,7 @@ const projectData = [
     previewUrl: "https://nextjs-travel-app-kavindu25.vercel.app/",
   },
   {
-    id: 5,
+    id: 4,
     title: "3D T-shirt Customizer",
     description: "3D t-shirt customizer using three.js library.",
     image: "images/projects/shirtCustomizer.png",
@@ -51,7 +42,7 @@ const projectData = [
     previewUrl: "https://3d-tshirt-customizer.vercel.app/",
   },
   {
-    id: 6,
+    id: 5,
     title: "Anime Hub",
     description: "Next 14 App with server actions and infinite scroll.",
     image: "images/projects/animeHub.png",
@@ -60,7 +51,7 @@ const projectData = [
     previewUrl: "https://anime-hub-xi.vercel.app/",
   },
   {
-    id: 7,
+    id: 6,
     title: "E-commerce App - WIP",
     description: "Next 14 E-commerce clone - WIP ",
     image: "images/projects/ecommerceApp.png",
@@ -68,6 +59,24 @@ const projectData = [
     gitUrl: "https://github.com/kavindu25/nextjs-ecommerce-clone",
     previewUrl: "/",
   },
+  {
+    id: 7,
+    title: "MERN Stack Book Manager App",
+    description: "Fullstack(MERN) application for managing books.",
+    image: "images/projects/bookManager.png",
+    tag: ["All", "Web", "React"],
+    gitUrl: "https://github.com/kavindu25/mern-book-store-app",
+    previewUrl: "https://mern-book-store-app.vercel.app/",
+  },
+  // {
+  //   id: 2,
+  //   title: "Weather App",
+  //   description: "Weatherapp with firebase login.",
+  //   image: "images/projects/weatherApp.png",
+  //   tag: ["All", "Web", "React"],
+  //   gitUrl: "https://github.com/kavindu25/react-weatherapp",
+  //   previewUrl: "https://react-weatherapp-gamma.vercel.app/",
+  // },
 ];
 
 const ProjectsSection = () => {
