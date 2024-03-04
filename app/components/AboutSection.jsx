@@ -25,31 +25,69 @@ const TAB_VIEW = [
     title: "Skills",
     id: "skills",
     content: (
-      <ul className="list-disc">
-        <li>Programming Languages:</li>
-        <ul className="pb-3 pl-4">
-          <li>Python</li>
-          <li>JavaScript</li>
-          <li>Java</li>
-          <li>Solidity</li>
-        </ul>
-        <li>Frameworks & Libraries:</li>
-        <ul className=" pb-3 pl-4">
-          <li>React.js</li>
-          <li>Next.js</li>
-          <li>React - redux</li>
-          <li>Truffle</li>
-          <li>Bootstrap CSS</li>
-          <li>Tailwind CSS</li>
-        </ul>
-        <li>Database:</li>
-        <ul className="pb-3 pl-4">
-          <li>MySQL</li>
-          <li>MongoDB</li>
-        </ul>
+      <>
+        <div className="flex md:flex-row flex-col gap-2  p-1 text-center font-medium">
+          <div className="border-2  md:rounded-l-full border-primary-400 p-3 hover:bg-zinc-900">
+            <h6 className="">Programming Languages</h6>
+          </div>
+          <div className="border-2 border-slate-400 md:rounded-r-full p-3 hover:bg-zinc-900">
+            <p>Python, JavaScript, Java, Solidity</p>
+          </div>
+        </div>
+        <div className="flex md:flex-row flex-col gap-2  p-1 text-center font-medium">
+          <div className="border-2  md:rounded-l-full border-primary-400 p-3 hover:bg-zinc-900">
+            <h6>Frameworks & Libraries</h6>
+          </div>
+          <div className="border-2 border-slate-400 md:rounded-r-full p-3 hover:bg-zinc-900">
+            <p>
+              React.js, React - redux, Next.js, Truffle, Bootstrap CSS, Tailwind
+              CSS
+            </p>
+          </div>
+        </div>
+        <div className="flex md:flex-row flex-col gap-2  p-1 text-center font-medium">
+          <div className="border-2  md:rounded-l-full border-primary-400 p-3 hover:bg-zinc-900">
+            <h6>Database</h6>
+          </div>
+          <div className="border-2 border-slate-400 md:rounded-r-full p-3 hover:bg-zinc-900">
+            <p>MySQL, MongoDB</p>
+          </div>
+        </div>
+        <div className="flex md:flex-row flex-col gap-2  p-1 text-center font-medium">
+          <div className="border-2  md:rounded-l-full border-primary-400 p-3 hover:bg-zinc-900">
+            <h6>Other Tools</h6>
+          </div>
+          <div className="border-2 border-slate-400 md:rounded-r-full p-3 hover:bg-zinc-900">
+            <p>Github, Linux, Strapi, Ganache </p>
+          </div>
+        </div>
+      </>
 
-        {/* <li>Solidity</li> */}
-      </ul>
+      // <ul className="list-disc">
+      //   <li>Programming Languages:</li>
+      //   <ul className="pb-3 pl-4">
+      //     <li>Python</li>
+      //     <li>JavaScript</li>
+      //     <li>Java</li>
+      //     <li>Solidity</li>
+      //   </ul>
+      //   <li>Frameworks & Libraries:</li>
+      //   <ul className=" pb-3 pl-4">
+      //     <li>React.js</li>
+      //     <li>Next.js</li>
+      //     <li>React - redux</li>
+      //     <li>Truffle</li>
+      //     <li>Bootstrap CSS</li>
+      //     <li>Tailwind CSS</li>
+      //   </ul>
+      //   <li>Database:</li>
+      //   <ul className="pb-3 pl-4">
+      //     <li>MySQL</li>
+      //     <li>MongoDB</li>
+      //   </ul>
+
+      //   {/* <li>Solidity</li> */}
+      // </ul>
     ),
   },
   {
@@ -143,7 +181,7 @@ const AboutSection = () => {
             up-to-date with the latest industry trends and technologies, with a
             dedication to continuous learning and improvement.
           </p>
-          <div className="flex flex-row mt-8">
+          <div className="flex flex-row mt-8 mx-auto">
             <TabButton
               selectTab={() => handleTabChange("education")}
               active={tab === "education"}
@@ -163,7 +201,7 @@ const AboutSection = () => {
               Experience
             </TabButton>
           </div>
-          <div className="mt-8 ">
+          <div className="mt-8 mx-auto ">
             {TAB_VIEW.find((t) => t.id === tab).content}
           </div>
         </div>
