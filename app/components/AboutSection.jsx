@@ -173,7 +173,7 @@ const AboutSection = () => {
             up-to-date with the latest industry trends and technologies, with a
             dedication to continuous learning and improvement.
           </p>
-          <div className="flex flex-row mt-8">
+          <div className="flex flex-row mt-8 mx-auto">
             <TabButton
               selectTab={() => handleTabChange("education")}
               active={tab === "education"}
@@ -193,7 +193,7 @@ const AboutSection = () => {
               Experience
             </TabButton>
           </div>
-          <div className="mt-8 ">
+          <div className="mt-8 mx-auto ">
             {TAB_VIEW.find((t) => t.id === tab).content}
           </div>
         </div>
