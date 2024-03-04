@@ -53,6 +53,14 @@ const TAB_VIEW = [
             <p>MySQL, MongoDB</p>
           </div>
         </div>
+        <div className="flex md:flex-row flex-col gap-2  p-1 text-center font-medium">
+          <div className="border-2  md:rounded-l-full border-primary-400 p-3 hover:bg-zinc-900">
+            <h6>Other Tools</h6>
+          </div>
+          <div className="border-2 border-slate-400 md:rounded-r-full p-3 hover:bg-zinc-900">
+            <p>Github, Linux, Strapi, Ganache </p>
+          </div>
+        </div>
       </>
 
       // <ul className="list-disc">
