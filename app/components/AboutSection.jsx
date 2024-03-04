@@ -25,13 +25,29 @@ const TAB_VIEW = [
     title: "Skills",
     id: "skills",
     content: (
-      <ul className="list-disc pl-2">
-        <li>Java</li>
-        <li>Python</li>
-        <li>JavaScript</li>
-        <li>React.js</li>
-        <li>Next.js</li>
-        <li>MySQL</li>
+      <ul className="list-disc">
+        <li>Programming Languages:</li>
+        <ul className="pb-3 pl-4">
+          <li>Python</li>
+          <li>JavaScript</li>
+          <li>Java</li>
+          <li>Solidity</li>
+        </ul>
+        <li>Frameworks & Libraries:</li>
+        <ul className=" pb-3 pl-4">
+          <li>React.js</li>
+          <li>Next.js</li>
+          <li>React - redux</li>
+          <li>Truffle</li>
+          <li>Bootstrap CSS</li>
+          <li>Tailwind CSS</li>
+        </ul>
+        <li>Database:</li>
+        <ul className="pb-3 pl-4">
+          <li>MySQL</li>
+          <li>MongoDB</li>
+        </ul>
+
         {/* <li>Solidity</li> */}
       </ul>
     ),
@@ -83,17 +99,17 @@ const AboutSection = () => {
         initial={{
           y: 100,
           opacity: 0,
-          transition: {  delay: 0 },
+          transition: { delay: 0 },
         }}
         animate={{
           x: 0,
           y: 0,
           opacity: 1,
-          transition: { delay:0.6, duration: 0.8 },
+          transition: { delay: 0.6, duration: 0.8 },
         }}
-        exit= {{
+        exit={{
           y: 100,
-          transition: {  delay: 0 },
+          transition: { delay: 0 },
         }}
         className="md:grid md:grid-cols-1 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16-"
       >
@@ -108,9 +124,9 @@ const AboutSection = () => {
             About Me
           </h2>
           <p className="text-base text-center lg:text-lg ">
-            I recently graduated from Informatics Institute of Technology with a
-            second upper class honours in Bsc(Computer Science). I completed my
-            1 year internship at{" "}
+            I graduated from Informatics Institute of Technology (Aug 2023) with
+            a second upper class honours in Bsc(Computer Science). I completed
+            my 1 year internship at{" "}
             <a
               href="https://avantrio.xyz/"
               target="_blank"
@@ -120,12 +136,12 @@ const AboutSection = () => {
             </a>{" "}
             I&apos;m proficient in Java, Python and Solidity and front-end
             development using HTML, CSS, and JavaScript frameworks (React/Next)
-            for creating responsive and user-friendly web applications. I am
-            familiar with SQL databases, including hands-on experience with
-            MySQL and using Git and GitHub for collaborative software
-            development and version control. Also, Im eager to stay up-to-date
-            with the latest industry trends and technologies, with a dedication
-            to continuous learning and improvement.
+            for creating responsive, mobile-friendly single page web
+            applications. I am familiar with SQL databases, including hands-on
+            experience with MySQL and using Git and GitHub for collaborative
+            software development and version control. Also, Im eager to stay
+            up-to-date with the latest industry trends and technologies, with a
+            dedication to continuous learning and improvement.
           </p>
           <div className="flex flex-row mt-8">
             <TabButton
