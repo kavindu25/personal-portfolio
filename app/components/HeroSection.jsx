@@ -28,7 +28,7 @@ const HeroSection = () => {
                 1000,
                 "A Software Engineer",
                 1000,
-                "A Web Developer",
+                "A Freelancer",
                 1000,
               ]}
               wrapper="span"
@@ -38,9 +38,9 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Hello I&apos;m Kavindu! I&apos;m a recent{" "}
+            Hello I&apos;m Kavindu! I&apos;m a {" "}
             <span className="text-white">computer science</span> graduate with{" "}
-            <span className="text-white">1 year internship experience.</span> I
+            <span className="text-white">1+ years of experience.</span> I
             enjoy building web applications using
             <span className="text-white"> React and Next.js.</span>
           </p>
