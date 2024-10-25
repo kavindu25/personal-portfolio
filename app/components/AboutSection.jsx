@@ -31,7 +31,7 @@ const TAB_VIEW = [
             <h6 className="">Programming Languages</h6>
           </div>
           <div className="border-2 border-slate-400 rounded-3xl md:rounded-r-full p-3 hover:bg-zinc-900">
-            <p>Python, JavaScript, Java, Solidity</p>
+            <p>Python, JavaScript, TypeScript, Java, Solidity</p>
           </div>
         </div>
         <div className="flex md:flex-row flex-col gap-2 mt-6 md:mt-0 p-1 text-center font-medium">
@@ -96,15 +96,37 @@ const TAB_VIEW = [
     content: (
       <ul className="list-disc pl-2">
         <li>
-          Associate Software Engineer,{" "}
+          Software Engineer,{" "}
           <a
-            href="https://exeve.global/"
+            href="https://avantrio.xyz/"
             target="_blank"
             className="text-primary-300 hover:text-primary-400 transition-all"
           >
-            Exeve
+            Avantrio
+          </a>{" "}
+          - Working since May 2024
+        </li>
+        <li>
+          Software Engineer,{" "}
+          <a
+            href="https://overleap.lk/"
+            target="_blank"
+            className="text-primary-300 hover:text-primary-400 transition-all"
+          >
+            Overleap
           </a>{" "}
           - 2 months
+        </li>
+        <li>
+          Associate Software Engineer,{" "}
+          <a
+            href="https://avantrio.xyz/"
+            target="_blank"
+            className="text-primary-300 hover:text-primary-400 transition-all"
+          >
+            Avantrio
+          </a>{" "}
+          - 6 months
         </li>
         <li>
           Trainee Software Engineer,{" "}
