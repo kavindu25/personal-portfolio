@@ -39,9 +39,9 @@ const HeroSection = () => {
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
             Hello I&apos;m Kavindu! I&apos;m a {" "}
-            <span className="text-white">computer science</span> graduate with{" "}
+            <span className="text-white">software engineer</span> with{" "}
             <span className="text-white">1+ years of experience.</span> I
-            enjoy building web applications using
+            enjoy building web applications using modern technologies like
             <span className="text-white"> React and Next.js.</span>
           </p>
           <div className="">
@@ -50,7 +50,7 @@ const HeroSection = () => {
                 Contact me
               </button>
             </a>
-            <a href="/Kavindu_de_Alwis_Resume.pdf" download>
+            <a href="/Kavindu-de-Alwis-SE.pdf" download>
               <button className="px-1 py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-blue-500 via-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3">
                 <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
                   Download CV

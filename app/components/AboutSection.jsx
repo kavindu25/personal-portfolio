@@ -16,7 +16,7 @@ const TAB_VIEW = [
           Westminster, UK - 2023
         </li>
         <li>
-          G.C.E. Advanced Level, Prince of Wales&apos; College, Moratuwa - 2018
+          G.C.E. Advanced Level, Prince of Wales&apos; College, Moratuwa - 2019
         </li>
       </ul>
     ),
@@ -31,7 +31,7 @@ const TAB_VIEW = [
             <h6 className="">Programming Languages</h6>
           </div>
           <div className="border-2 border-slate-400 rounded-3xl md:rounded-r-full p-3 hover:bg-zinc-900">
-            <p>Python, JavaScript, TypeScript, Java, Solidity</p>
+            <p>Python, JavaScript, TypeScript, Java</p>
           </div>
         </div>
         <div className="flex md:flex-row flex-col gap-2 mt-6 md:mt-0 p-1 text-center font-medium">
@@ -40,7 +40,7 @@ const TAB_VIEW = [
           </div>
           <div className="border-2 border-slate-400 rounded-3xl md:rounded-r-full p-3 hover:bg-zinc-900">
             <p>
-              React.js, React - redux, Next.js, Truffle, Bootstrap CSS, Tailwind
+              React JS, React - redux, Next JS, Node JS, Bootstrap CSS, Tailwind
               CSS
             </p>
           </div>
@@ -58,7 +58,7 @@ const TAB_VIEW = [
             <h6>Other Tools</h6>
           </div>
           <div className="border-2 border-slate-400 rounded-3xl md:rounded-r-full p-3 hover:bg-zinc-900">
-            <p>Github, Linux, Strapi, Ganache </p>
+            <p>Github, Linux, Docker, Strapi </p>
           </div>
         </div>
       </>
@@ -104,18 +104,18 @@ const TAB_VIEW = [
           >
             Avantrio
           </a>{" "}
-          - Working since May 2024
+          - Since November 2024
         </li>
         <li>
-          Software Engineer,{" "}
+          Software Engineer (Part Time),{" "}
           <a
-            href="https://overleap.lk/"
+            href="https://www.streamrx.co/"
             target="_blank"
             className="text-primary-300 hover:text-primary-400 transition-all"
           >
-            Overleap
+            StreamRX
           </a>{" "}
-          - 2 months
+          - 3 months
         </li>
         <li>
           Associate Software Engineer,{" "}
@@ -126,7 +126,7 @@ const TAB_VIEW = [
           >
             Avantrio
           </a>{" "}
-          - 6 months
+          - 1 year 2 months
         </li>
         <li>
           Trainee Software Engineer,{" "}
@@ -197,11 +197,13 @@ const AboutSection = () => {
             I&apos;m proficient in Java, Python and Solidity and front-end
             development using HTML, CSS, and JavaScript frameworks (React/Next)
             for creating responsive, mobile-friendly single page web
-            applications. I am familiar with SQL databases, including hands-on
+            applications as well as backend development using Node JS and
+            Django. I am familiar with SQL databases, including hands-on
             experience with MySQL and using Git and GitHub for collaborative
-            software development and version control. Also, Im eager to stay
-            up-to-date with the latest industry trends and technologies, with a
-            dedication to continuous learning and improvement.
+            software development and version control.
+            {/* Also, Im eager to stay up-to-date
+            with the latest industry trends and technologies, with a dedication
+            to continuous learning and improvement. */}
           </p>
           <div className="flex flex-row mt-12 mx-auto">
             <TabButton
