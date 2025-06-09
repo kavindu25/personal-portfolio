@@ -7,12 +7,12 @@ import { motion, useInView } from "framer-motion";
 const projectData = [
   {
     id: 1,
-    title: "Next.js Portfolio Website",
-    description: "Personal portfolio developed using Next.js.",
-    image: "images/projects/myPortfolio.png",
-    tag: ["All", "Web", "Next"],
-    gitUrl: "https://github.com/kavindu25/personal-portfolio",
-    previewUrl: "/",
+    title: "reFile",
+    description: "A webapp to transform file names and download as a zip file.",
+    image: "images/projects/reFile.png",
+    tag: ["All", "Web"],
+    gitUrl: "https://github.com/kavindu25/refile",
+    previewUrl: "https://refile-xi.vercel.app/",
   },
   {
     id: 2,
@@ -68,6 +68,15 @@ const projectData = [
     gitUrl: "https://github.com/kavindu25/mern-book-store-app",
     previewUrl: "https://mern-book-store-app.vercel.app/",
   },
+  // {
+  //   id: 1,
+  //   title: "Next.js Portfolio Website",
+  //   description: "Personal portfolio developed using Next.js.",
+  //   image: "images/projects/myPortfolio.png",
+  //   tag: ["All", "Web", "Next"],
+  //   gitUrl: "https://github.com/kavindu25/personal-portfolio",
+  //   previewUrl: "/",
+  // },
   // {
   //   id: 2,
   //   title: "Weather App",
