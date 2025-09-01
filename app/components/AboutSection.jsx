@@ -9,13 +9,13 @@ const TAB_VIEW = [
     title: "Education",
     id: "education",
     content: (
-      <ul className="list-disc pl-2">
-        <li>
+      <ul className="list-disc pl-2 font-medium">
+        <li className="py-1">
           Bachelor of Science - BSc, Computer Science(Second Upper Class),
           Informatics Institute of Technology affiliated with University of
           Westminster, UK - 2023
         </li>
-        <li>
+        <li className="py-1">
           G.C.E. Advanced Level, Prince of Wales&apos; College, Moratuwa - 2019
         </li>
       </ul>
@@ -94,8 +94,8 @@ const TAB_VIEW = [
     title: "Experience",
     id: "experience",
     content: (
-      <ul className="list-disc pl-2">
-        <li>
+      <ul className="list-disc pl-2 font-medium">
+        <li className="py-1">
           Software Engineer,{" "}
           <a
             href="https://avantrio.xyz/"
@@ -106,7 +106,7 @@ const TAB_VIEW = [
           </a>{" "}
           - Since November 2024
         </li>
-        <li>
+        <li className="py-1">
           Software Engineer (Part Time),{" "}
           <a
             href="https://www.streamrx.co/"
@@ -117,7 +117,7 @@ const TAB_VIEW = [
           </a>{" "}
           - 3 months
         </li>
-        <li>
+        <li className="py-1">
           Associate Software Engineer,{" "}
           <a
             href="https://avantrio.xyz/"
@@ -128,7 +128,7 @@ const TAB_VIEW = [
           </a>{" "}
           - 1 year 2 months
         </li>
-        <li>
+        <li className="py-1">
           Trainee Software Engineer,{" "}
           <a
             href="https://avantrio.xyz/"
