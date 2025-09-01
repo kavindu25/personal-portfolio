@@ -23,12 +23,12 @@ const HeroSection = () => {
               sequence={[
                 // Same substring at the start will only be typed out once, initially
                 "Kavindu",
-                1000, // wait 1s before replacing "Mice" with "Hamsters"
+                1000, // wait 1s before replacing
                 "A CS Graduate",
                 1000,
                 "A Software Engineer",
                 1000,
-                "A Freelancer",
+                "A Fullstack Developer",
                 1000,
               ]}
               wrapper="span"
@@ -38,11 +38,12 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Hello I&apos;m Kavindu! I&apos;m a {" "}
-            <span className="text-white">software engineer</span> with{" "}
-            <span className="text-white">1+ years of experience.</span> I
-            enjoy building web applications using modern technologies like
-            <span className="text-white"> React and Next.js.</span>
+            Hi, I&apos;m Kavindu - a{" "}
+            <span className="text-white">full stack software engineer</span>{" "}
+            with{" "}
+            <span className="text-white">2+ years of hands-on experience</span>{" "}
+            building scalable and user-friendly web applications using
+            <span className="text-white"> MERN Stack.</span>
           </p>
           <div className="">
             <a href="mailto:kavindudealwis@gmail.com">
