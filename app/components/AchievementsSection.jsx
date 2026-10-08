@@ -19,7 +19,6 @@ const achievementsList = [
     name: "Awards",
     value: 10,
     postfix: "+",
-    postfix: "+",
   },
   {
     name: "Github contributions",
@@ -51,7 +50,7 @@ const AchievementsSection = () => {
                     return {
                       mass: 1,
                       friction: 100,
-                      tensions: 140 * (index + 1),
+                      tension: 140 * (index + 1),
                     };
                   }}
                 />

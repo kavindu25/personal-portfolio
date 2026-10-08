@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useTransition } from "react";
 import TabButton from "./TabButton";
 import { motion } from "framer-motion";
@@ -100,6 +99,7 @@ const TAB_VIEW = [
           <a
             href="https://avantrio.xyz/"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-primary-300 hover:text-primary-400 transition-all"
           >
             Avantrio
@@ -111,6 +111,7 @@ const TAB_VIEW = [
           <a
             href="https://www.streamrx.co/"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-primary-300 hover:text-primary-400 transition-all"
           >
             StreamRX
@@ -122,6 +123,7 @@ const TAB_VIEW = [
           <a
             href="https://avantrio.xyz/"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-primary-300 hover:text-primary-400 transition-all"
           >
             Avantrio
@@ -133,6 +135,7 @@ const TAB_VIEW = [
           <a
             href="https://avantrio.xyz/"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-primary-300 hover:text-primary-400 transition-all"
           >
             Avantrio
@@ -146,13 +149,13 @@ const TAB_VIEW = [
 
 const AboutSection = () => {
   const [tab, setTab] = useState("skills");
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
-  const handleTabChange = (id) => [
+  const handleTabChange = (id) => {
     startTransition(() => {
       setTab(id);
-    }),
-  ];
+    });
+  };
   return (
     <section className="text-white">
       <motion.div
@@ -190,6 +193,7 @@ const AboutSection = () => {
             <a
               href="https://avantrio.xyz/"
               target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-primary-400"
             >
               avantrio.
