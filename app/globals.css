@@ -1,27 +1,226 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* Design tokens. Light is the default; dark follows the OS until the
+   visitor picks a theme with the toggle (stored as data-theme).
+
+   Text has three tones, strongest to quietest:
+     --ink       titles, key facts, outcomes
+     --ink-2     running text: summaries, bullets, descriptions
+     --ink-soft  supporting detail: dates, labels, chips, sub-bullets
+   Every pairing clears 4.5:1 on --page and --surface in both themes. */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --page: #f1f3f2;
+  --surface: #e6ebe9;
+  --line: #cdd5d2;
+  --ink: #0f1a22;
+  --ink-2: #33424c;
+  --ink-soft: #4e5d67;
+  --accent: #096570;
+  --accent-ink: #ffffff;
+  --signal: #d99a00;
+  --danger: #b3261e;
+  --body-leading: 1.65;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  :root:not([data-theme="light"]) {
+    --page: #0e151b;
+    --surface: #17212a;
+    --line: #2a3843;
+    --ink: #f6f9fa;
+    --ink-2: #c3cfd6;
+    --ink-soft: #93a4ae;
+    --accent: #4cc9d2;
+    --accent-ink: #0e151b;
+    --signal: #f0b429;
+    --danger: #ff9a8f;
+    --body-leading: 1.7;
+    color-scheme: dark;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+:root[data-theme="dark"] {
+  --page: #0e151b;
+  --surface: #17212a;
+  --line: #2a3843;
+  --ink: #f6f9fa;
+  --ink-2: #c3cfd6;
+  --ink-soft: #93a4ae;
+  --accent: #4cc9d2;
+  --accent-ink: #0e151b;
+  --signal: #f0b429;
+  --danger: #ff9a8f;
+  --body-leading: 1.7;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-signal: var(--signal);
+  --color-danger: var(--danger);
+
+  /* Roles, not names. The faces themselves are chosen in app/fonts.ts. */
+  --font-heading: var(--font-heading-face), ui-sans-serif, system-ui, sans-serif;
+  --font-text: var(--font-text-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
+
+  /* Type roles. Fluid between a 360px and a 1440px viewport; body never
+     drops below 17px. Use these instead of arbitrary sizes. */
+  --text-display: clamp(2.4rem, 1.6rem + 3.4vw, 4.25rem);
+  --text-display--line-height: 1.05;
+  --text-title: clamp(1.75rem, 1.45rem + 1.2vw, 2.4rem);
+  --text-title--line-height: 1.12;
+  --text-heading: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
+  --text-heading--line-height: 1.25;
+  --text-lead: clamp(1.125rem, 1.07rem + 0.3vw, 1.3rem);
+  --text-lead--line-height: 1.45;
+  --text-body: clamp(1.0625rem, 1.03rem + 0.15vw, 1.125rem);
+  --text-body--line-height: var(--body-leading);
+  --text-small: 1rem;
+  --text-small--line-height: 1.55;
+  --text-meta: 0.9375rem;
+  --text-meta--line-height: 1.4;
+  --text-micro: 0.875rem;
+  --text-micro--line-height: 1.35;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--page);
+    color: var(--ink-2);
+    font-family: var(--font-text);
+    font-size: var(--text-body);
+    line-height: var(--body-leading);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  h1,
+  h2 {
+    font-weight: 650;
+  }
+
+  h3,
+  h4 {
+    font-weight: 600;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+}
+
+@layer components {
+  /* Bulleted copy. A bullet nested under another reads one tone and one
+     size quieter, with a hollow marker, so child never matches parent. */
+  .bullets {
+    list-style: disc;
+    padding-left: 1.25rem;
+    max-inline-size: 64ch;
+    color: var(--ink-2);
+  }
+
+  .bullets > li {
+    padding-left: 0.25rem;
+  }
+
+  .bullets > li + li {
+    margin-top: 0.75rem;
+  }
+
+  .bullets li::marker {
+    color: var(--accent);
+  }
+
+  .bullets ul,
+  .bullets ol {
+    list-style: circle;
+    margin-top: 0.5rem;
+    padding-left: 1.25rem;
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+    color: var(--ink-soft);
+  }
+
+  .bullets ul > li + li,
+  .bullets ol > li + li {
+    margin-top: 0.375rem;
+  }
+}
+
+/* The one orchestrated moment: the hero trace draws in once, then rests. */
+@keyframes trace-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes trace-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.trace-bar {
+  transform-origin: left center;
+  animation: trace-draw 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(250ms + var(--i) * 140ms);
+}
+
+.trace-total {
+  animation: trace-fade 400ms ease-out both;
+  animation-delay: 1000ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .trace-bar,
+  .trace-total {
+    animation: none;
+  }
 }
