@@ -28,7 +28,7 @@ Single-page site with sections: hero (stack "trace"), selected work (professiona
 
 - Stack: Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4; fonts via next/font (Bricolage Grotesque, Source Serif 4, JetBrains Mono).
 - All copy lives in `app/data/` (profile, experience, projects, capabilities, education); components render it. Placeholders are marked `[TODO ...]` (`npm run todos`); currently the production domain (`siteUrl`) is unconfirmed.
-- Existing features (repo evidence, not a freeze): light/dark theme with OS default and stored toggle, Resend contact form, Medium feed, CV PDF at `/Kavindu-de-Alwis-SE.pdf`, JSON-LD Person, OG image, sitemap, robots.
+- Existing features (repo evidence, not a freeze): light/dark theme with OS default and stored toggle, Resend contact form, Medium feed, CV PDF at `/Kavindu_de_Alwis_SSE.pdf`, JSON-LD Person, OG image, sitemap, robots.
 - Professional work is presented without client names (e.g. "Fintech client").
 
 ## Evidence on Hand

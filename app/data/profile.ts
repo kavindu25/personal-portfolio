@@ -5,7 +5,7 @@ export const profile = {
   email: "kavindudealwis@gmail.com",
   location: "Kesbewa, Sri Lanka",
   mediumHandle: "@kavindudealwis",
-  cvPath: "/Kavindu-de-Alwis-SE.pdf",
+  cvPath: "/Kavindu_de_Alwis_SSE.pdf",
   headline: "Full stack engineer who owns web products front to back.",
   summary:
     "Software engineer at Skaleminds with four years in production, from React and Next.js front ends to Node.js APIs, databases and Docker deployments. I take features from the first design discussion to production.",
