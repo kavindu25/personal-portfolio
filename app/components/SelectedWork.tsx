@@ -85,7 +85,7 @@ export function SelectedWork() {
       <div className="mt-6 border-t border-line pt-12">
         <h3 className="text-heading">Side projects</h3>
         <p className="mt-2 max-w-[52ch] text-small text-ink-soft">
-          Where I try new tools before they reach client work.
+          Projects I build for fun, and to test out new tools before using them on client work.
         </p>
         <div className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2">
           {personal.map((project) => (
