@@ -83,6 +83,19 @@ export const projects: Project[] = [
   //   live: "https://mern-book-store-app.vercel.app/",
   // },
   {
+    slug: "clipbase",
+    kind: "personal",
+    title: "Clipbase",
+    role: "Personal project",
+    summary:
+      "Highlight text on any page, add notes, and organise it all into collections.",
+    stack: ["React", "Vite", "Chrome extension"],
+    image: "/images/projects/clipbase.png",
+    imageAlt: "Clipbase side panel showing saved highlights, notes and collections",
+    repo: "https://github.com/kavindu25/YOUR-REPO-NAME",
+    live: "https://chromewebstore.google.com/detail/lphhcanodpheoafbgkeclblimkldfjmh?utm_source=item-share-cb",
+  },
+  {
     slug: "3d-tshirt-customizer",
     kind: "personal",
     title: "3D t-shirt customizer",
