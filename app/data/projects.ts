@@ -1,3 +1,5 @@
+export type Layer = "browser" | "api" | "data" | "infra";
+
 export type Project = {
   slug: string;
   kind: "professional" | "personal";
@@ -7,6 +9,13 @@ export type Project = {
   summary: string;
   /** The result, preferably with a number. Professional projects only. */
   outcome?: string;
+  /** The client's field, shown beside the title. Professional projects only. */
+  sector?: string;
+  /**
+   * The layers of the stack this project touched, for the request trace.
+   * Only layers the work really reached; leave the others out.
+   */
+  layers?: Partial<Record<Layer, string>>;
   stack: string[];
   image?: string;
   imageAlt?: string;
@@ -23,6 +32,8 @@ export const projects: Project[] = [
     summary:
       "Automates mortgage applications for brokers. OCR extracts data from customer documents and OpenAI models structure it, while the documents themselves sit in AWS S3 and are retrieved through presigned URLs.",
     outcome: "Cut manual effort for brokers by 60%.",
+    sector: "Fintech",
+    layers: { api: "OCR extraction, OpenAI models structure the data", infra: "AWS S3, presigned URLs" },
     stack: ["OCR", "OpenAI LLMs", "AWS S3"],
   },
   {
@@ -34,6 +45,8 @@ export const projects: Project[] = [
       "Cross-platform mobile app built in React Native. I built core features, API integrations and state management, plus the subscription workflows and in-app purchases through RevenueCat.",
     outcome:
       "Shipped subscription workflows and in-app purchases across platforms from a single React Native codebase.",
+    sector: "Health",
+    layers: { browser: "React Native app, state management", api: "API integrations, RevenueCat subscriptions" },
     stack: ["React Native", "RevenueCat"],
   },
   {
@@ -44,6 +57,8 @@ export const projects: Project[] = [
     summary:
       "Planning system for manufacturing processes. I built its core modules in Django.",
     outcome: "Improved operational efficiency for manufacturing processes.",
+    sector: "Manufacturing",
+    layers: { api: "Core modules in Django" },
     stack: ["Django"],
   },
   {
@@ -54,6 +69,8 @@ export const projects: Project[] = [
     summary:
       "Web platform that shows US pharmacy owners detailed drug reimbursement insights. I built a filterable price comparison dashboard covering 100+ drugs across 5+ insurance plans, a CSV parser for analysed plan data, and secure S3 storage for uploaded files.",
     outcome: "Cut manual data handling by 70%.",
+    sector: "Pharmacy",
+    layers: { browser: "Filterable price comparison dashboard", api: "Django, CSV parser for plan data", infra: "AWS S3 for uploaded files" },
     stack: ["Django", "JavaScript", "Bootstrap CSS", "AWS S3"],
   },
   // {
@@ -92,7 +109,7 @@ export const projects: Project[] = [
     stack: ["React", "Vite", "Chrome extension"],
     image: "/images/projects/clipbase.png",
     imageAlt: "Clipbase side panel showing saved highlights, notes and collections",
-    repo: "https://github.com/kavindu25/YOUR-REPO-NAME",
+    repo: "https://github.com/kavindu25/research-annotator",
     live: "https://chromewebstore.google.com/detail/lphhcanodpheoafbgkeclblimkldfjmh?utm_source=item-share-cb",
   },
   {

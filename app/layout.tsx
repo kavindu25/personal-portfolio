@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { profile } from "./data/profile";
+import { Motion } from "./components/Motion";
 import { fontVariables } from "./fonts";
 import "./globals.css";
 
@@ -29,7 +30,10 @@ export const viewport: Viewport = {
 };
 
 // Runs before first paint so a stored theme never flashes the wrong colours.
-const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+// It also marks the page as scripted (data-js), which is what lets entrance
+// animations hide content until it arrives. If the motion script has not
+// started within three seconds, the mark is removed so nothing stays hidden.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}var r=document.documentElement;r.dataset.js="";setTimeout(function(){if(!window.__reveal)delete r.dataset.js},3000);`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -41,7 +45,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Motion />
+      </body>
     </html>
   );
 }

@@ -9,7 +9,9 @@ type Status =
   | { state: "error"; message: string };
 
 const field =
-  "mt-2 block w-full rounded-md border border-line bg-page px-3.5 py-2.5 text-small text-ink placeholder:text-ink-soft focus:border-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-accent";
+  "mt-2 block w-full bg-[var(--field-input)] px-4 py-3.5 text-body text-[var(--ink)] placeholder:text-[#4e5d67] outline-none focus:outline-solid focus:outline-2 focus:-outline-offset-2 focus:outline-[var(--field-action)]";
+
+const label = "block text-small font-semibold text-field-ink";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>({ state: "idle" });
@@ -46,19 +48,19 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <label className="block text-small font-medium text-ink">
+    <form onSubmit={onSubmit} className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className={label}>
           Name
           <input name="name" type="text" required maxLength={100} autoComplete="name" className={field} />
         </label>
-        <label className="block text-small font-medium text-ink">
+        <label className={label}>
           Email
           <input name="email" type="email" required maxLength={200} autoComplete="email" className={field} />
         </label>
       </div>
 
-      <label className="block text-small font-medium text-ink">
+      <label className={label}>
         Message
         <textarea
           name="message"
@@ -67,34 +69,33 @@ export function ContactForm() {
           maxLength={4000}
           rows={6}
           placeholder="What are you building, and where could I help?"
-          className={field}
+          className={`${field} resize-y`}
         />
       </label>
 
       {/* Honeypot: real visitors never see or fill this. */}
-      <div className="absolute -left-[9999px]" aria-hidden="true">
+      <div className="sr-only" aria-hidden="true">
         <label>
           Leave this empty
           <input name="company" type="text" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
 
-      <div className="flex flex-wrap items-center gap-4">
-        <button
-          type="submit"
-          disabled={status.state === "sending"}
-          className="rounded-md bg-accent px-5 py-3 text-small font-medium text-accent-ink transition-opacity hover:opacity-90 disabled:opacity-60"
-        >
-          {status.state === "sending" ? "Sending..." : "Send message"}
-        </button>
+      <button
+        type="submit"
+        disabled={status.state === "sending"}
+        className="flex min-h-14 w-full items-center justify-between bg-[var(--field-action)] px-5 font-semibold text-[var(--field-action-ink)] transition-[transform,opacity] duration-150 active:scale-[0.99] disabled:opacity-70"
+      >
+        {status.state === "sending" ? "Sending..." : "Send message"}
+        <span className="arrow" aria-hidden="true">→</span>
+      </button>
 
-        <p role="status" aria-live="polite" className="text-small text-ink-2">
-          {status.state === "sent" ? "Message sent. Thanks, I will be in touch." : null}
-          {status.state === "error" ? (
-            <span className="text-danger">{status.message}</span>
-          ) : null}
-        </p>
-      </div>
+      <p role="status" aria-live="polite" className="min-h-[1.5em] text-small font-semibold">
+        {status.state === "sent" ? "Message sent. Thanks, I will be in touch." : null}
+        {status.state === "error" ? (
+          <span className="text-[var(--field-danger)]">{status.message}</span>
+        ) : null}
+      </p>
     </form>
   );
 }
