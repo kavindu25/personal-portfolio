@@ -9,9 +9,9 @@ type Status =
   | { state: "error"; message: string };
 
 const field =
-  "mt-2 block w-full bg-[var(--field-input)] px-4 py-3.5 text-body text-[var(--ink)] placeholder:text-[#4e5d67] outline-none focus:outline-solid focus:outline-2 focus:-outline-offset-2 focus:outline-[var(--field-action)]";
+  "mt-2 block w-full bg-surface px-4 py-3.5 text-body text-ink placeholder:text-ink-soft outline-none transition-[outline-color] duration-200 focus:outline-solid focus:outline-2 focus:-outline-offset-2 focus:outline-accent";
 
-const label = "block text-small font-semibold text-field-ink";
+const label = "block text-small font-semibold";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>({ state: "idle" });
@@ -84,7 +84,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status.state === "sending"}
-        className="flex min-h-14 w-full items-center justify-between bg-[var(--field-action)] px-5 font-semibold text-[var(--field-action-ink)] transition-[transform,opacity] duration-150 active:scale-[0.99] disabled:opacity-70"
+        className="button w-full justify-between disabled:opacity-70"
       >
         {status.state === "sending" ? "Sending..." : "Send message"}
         <span className="arrow" aria-hidden="true">→</span>
@@ -93,7 +93,7 @@ export function ContactForm() {
       <p role="status" aria-live="polite" className="min-h-[1.5em] text-small font-semibold">
         {status.state === "sent" ? "Message sent. Thanks, I will be in touch." : null}
         {status.state === "error" ? (
-          <span className="text-[var(--field-danger)]">{status.message}</span>
+          <span className="text-danger">{status.message}</span>
         ) : null}
       </p>
     </form>

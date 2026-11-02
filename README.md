@@ -16,7 +16,7 @@ All copy lives in `app/data/`, not in components:
 
 | File | What it controls |
 | --- | --- |
-| `profile.ts` | Name, headline, summary, job-search status, links, Medium handle, hero trace rows |
+| `profile.ts` | Name, headline, summary, job-search status, links, Medium handle |
 | `experience.ts` | Employers, roles and highlights |
 | `projects.ts` | Case studies (`professional`) and side projects (`personal`) |
 | `capabilities.ts` | Skills, grouped by what they solve |
@@ -32,7 +32,7 @@ Placeholders are marked `[TODO ...]`. List what is left with `npm run todos`.
 
 Colours are CSS variables in `app/globals.css`. Light is the default, dark follows the OS, and the toggle in the nav stores the visitor's choice.
 
-Running text is set in the full ink (`--ink`); `--ink-soft` is for secondary notes such as dates, stacks and labels. `--field` is the deep teal ground of the hero stage and the contact card.
+Running text is set in the full ink (`--ink`); `--ink-soft` is for secondary notes such as dates, stacks and labels. Motion lives in `app/components/motion/` (Lenis smooth scrolling, masked heading reveals, word-by-word statements, pictures settling into their frames) and in the motion block of `globals.css`; all of it is switched off for reduced motion.
 
 ## Typography
 

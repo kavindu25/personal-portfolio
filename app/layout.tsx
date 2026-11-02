@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { profile } from "./data/profile";
 import { Motion } from "./components/Motion";
+import { SmoothScroll } from "./components/motion/SmoothScroll";
 import { fontVariables } from "./fonts";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <Motion />
+        <SmoothScroll />
       </body>
     </html>
   );

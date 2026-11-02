@@ -1,5 +1,7 @@
 import { profile } from "../data/profile";
 import { ContactForm } from "./ContactForm";
+import { ScrollWords } from "./motion/ScrollWords";
+import { Section } from "./Section";
 
 type Option = {
   title: string;
@@ -16,64 +18,62 @@ const options: Option[] = [
   { title: "CV", value: "Download as PDF", href: profile.cvPath, download: true },
 ];
 
-// One deep teal card: who to contact and how on the left, the form on the right.
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+
+// The ask, read word by word, then the facts a recruiter needs, the ways to
+// reach me and the form. No card around any of it.
 export function Contact() {
-  return (
-    <section id="contact" aria-labelledby="contact-title" className="frame section-gap">
-      <div
-        className="on-field mx-auto grid max-w-[78rem] bg-field text-field-ink lg:grid-cols-[46%_54%]"
-        data-reveal
-      >
-        <div className="flex flex-col justify-between gap-12 p-6 sm:p-10 lg:p-12">
-          <div>
-            <h2 id="contact-title" className="text-title">
-              Contact
-            </h2>
-            <p className="mt-6 max-w-[30ch] text-lead font-semibold">
-              Hiring an engineer who can own a product from interface to deployment? Tell me about the team and what you need to ship.
-            </p>
+  const details = (
+    <>
+      <dl className="grid gap-y-4" data-reveal style={d(160)}>
+        {profile.workDetails.map((item) => (
+          <div key={item.label}>
+            <dt className="text-small text-ink-soft">{item.label}</dt>
+            <dd className="font-semibold">{item.value}</dd>
           </div>
+        ))}
+      </dl>
+      <ul className="mt-8 grid gap-x-6 gap-y-2 sm:grid-cols-2" data-reveal style={d(220)}>
+        {options.map((option) => (
+          <li key={option.title}>
+            <a
+              href={option.href}
+              {...(option.external
+                ? { target: "_blank", rel: "noopener noreferrer", "aria-label": `${option.title}: ${option.value} (opens in a new tab)` }
+                : {})}
+              {...(option.download ? { download: true } : {})}
+              className="flex min-h-11 flex-col justify-center"
+            >
+              <span className="flex items-center gap-2 font-semibold">
+                <span className="link">{option.title}</span>
+                <span className="arrow" aria-hidden="true">
+                  {option.download ? "↓" : "→"}
+                </span>
+              </span>
+              <span className="break-words text-small text-ink-soft">{option.value}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 
-          <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-3 lg:grid-cols-1">
-            {profile.workDetails.map((item) => (
-              <div key={item.label}>
-                <dt className="text-small text-field-soft">{item.label}</dt>
-                <dd className="mt-0.5 font-semibold">{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
-            {options.map((option) => (
-              <li key={option.title}>
-                <a
-                  href={option.href}
-                  {...(option.external
-                    ? { target: "_blank", rel: "noopener noreferrer", "aria-label": `${option.title}: ${option.value} (opens in a new tab)` }
-                    : {})}
-                  {...(option.download ? { download: true } : {})}
-                  className="group flex min-h-11 flex-col justify-center"
-                >
-                  <span className="flex items-center gap-2 font-semibold">
-                    <span className="link">{option.title}</span>
-                    <span className="arrow" aria-hidden="true">
-                      {option.download ? "↓" : "→"}
-                    </span>
-                  </span>
-                  <span className="break-words text-small text-field-soft">{option.value}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="p-6 pt-0 sm:p-10 sm:pt-0 lg:p-12 lg:pl-0">
+  return (
+    // The question across the top; the ways to reach me beside the form.
+    <Section id="contact" title="Contact">
+      <ScrollWords
+        text="Hiring an engineer who can own a product from interface to deployment? Tell me about the team and what you need to ship."
+        className="max-w-[56ch] font-heading text-lead font-medium leading-[1.25] tracking-[-0.015em]"
+      />
+      <div className="mt-[clamp(3rem,6vw,5rem)] grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div className="max-lg:order-last">{details}</div>
+        <div data-reveal>
           <h3 className="text-lead">Send a message</h3>
           <div className="mt-6">
             <ContactForm />
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

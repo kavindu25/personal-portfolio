@@ -1,118 +1,114 @@
 import Image from "next/image";
 import { projects, type Project } from "../data/projects";
+import { MaskText } from "./motion/MaskText";
+import { Section } from "./Section";
+import { Stack } from "./Stack";
 
-export const professional = projects.filter((p) => p.kind === "professional");
+const professional = projects.filter((p) => p.kind === "professional");
 const personal = projects.filter((p) => p.kind === "personal");
+
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 function CaseStudy({ project }: { project: Project }) {
   return (
-    <article id={`case-${project.slug}`} data-trace={project.slug} className="scroll-mt-32">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1" data-reveal>
-        <h3 className="text-lead">{project.title}</h3>
-        {project.sector ? <p className="text-small text-ink-soft">{project.sector}</p> : null}
-      </div>
-      <p className="mt-1 text-small text-ink-soft" data-reveal style={{ "--d": "70ms" } as React.CSSProperties}>
-        {project.role}
-      </p>
-      <p className="mt-5 max-w-[62ch]" data-reveal style={{ "--d": "140ms" } as React.CSSProperties}>
-        {project.summary}
-      </p>
-      {project.outcome ? (
-        <p
-          className="mt-6 max-w-[34ch] text-lead font-semibold text-accent"
-          data-reveal
-          style={{ "--d": "210ms" } as React.CSSProperties}
-        >
-          {project.outcome}
+    <article
+      id={`case-${project.slug}`}
+      className="grid scroll-mt-32 gap-x-16 gap-y-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+    >
+      <div>
+        <MaskText as="h3" text={project.title} className="text-[clamp(1.6rem,1.2rem+1.4vw,2.25rem)] leading-[1.1]" />
+        <p className="mt-3 text-small text-ink-soft" data-reveal style={d(80)}>
+          {project.role}
         </p>
-      ) : null}
-      <p className="mt-5 text-small text-ink-soft" data-reveal style={{ "--d": "210ms" } as React.CSSProperties}>
-        <span className="sr-only">Technologies used: </span>
-        {project.stack.join(", ")}
-      </p>
-
+      </div>
+      <div>
+        <p className="max-w-[60ch]" data-reveal style={d(140)}>
+          {project.summary}
+        </p>
+        {project.outcome ? (
+          <p className="mt-5 max-w-[40ch] text-lead font-semibold text-accent" data-reveal style={d(200)}>
+            {project.outcome}
+          </p>
+        ) : null}
+        <div className="mt-6">
+          <Stack items={project.stack} delay={260} />
+        </div>
+      </div>
     </article>
   );
 }
 
 export function SelectedWork() {
   return (
-    <section id="work" aria-labelledby="work-title" className="px-[var(--m)] pb-[calc(var(--gap-section)/2)] pt-[calc(var(--gap-section)/2)] lg:px-0 lg:pb-[calc(var(--gap-section)/2)]">
-      <h2 id="work-title" className="text-title" data-reveal>
-        Selected work
-      </h2>
-      <p className="mt-4 max-w-[44ch] text-lead" data-reveal style={{ "--d": "70ms" } as React.CSSProperties}>
-        What I built, who it was for, and what changed because of it.
-      </p>
-
-      <div className="mt-[clamp(4rem,8vw,7rem)] space-y-[clamp(5rem,10vw,9rem)]">
+    <Section id="work" title="Selected work" intro="What I built, who it was for, and what changed because of it.">
+      <div className="space-y-[clamp(7rem,9vw,8rem)]">
         {professional.map((project) => (
           <CaseStudy key={project.slug} project={project} />
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 
 function SideProject({ project }: { project: Project }) {
   const label = (what: string) => `${project.title}, ${what} (opens in a new tab)`;
   return (
-    <article className="seam" aria-labelledby={`side-${project.slug}`}>
-      {project.image ? (
-        <>
-          <div className="seam__pane seam__pane--l" aria-hidden="true">
-            <div className="seam__picture">
-              <Image src={project.image} alt="" fill sizes="100vw" />
-            </div>
-          </div>
-          <div className="seam__pane seam__pane--r">
-            <div className="seam__picture">
-              <Image src={project.image} alt={project.imageAlt ?? ""} fill sizes="100vw" />
-            </div>
-          </div>
-        </>
-      ) : null}
-
-      <div className="relative flex h-full flex-col items-center justify-center px-[var(--m)] text-center">
-        <h3 id={`side-${project.slug}`} className="seam__title" data-reveal>
-          {project.title}
-        </h3>
-        <p className="mt-8 max-w-[40ch] text-lead">{project.summary}</p>
-        <p className="mt-3 text-small text-white/80">
-          <span className="sr-only">Technologies used: </span>
-          {project.stack.join(", ")}
-        </p>
-        <p className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-body font-semibold">
-          {project.live ? (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={label("live demo")} className="link inline-flex min-h-11 items-center gap-2">
-              Live demo <span className="arrow" aria-hidden="true">→</span>
-            </a>
+    <li className="row">
+      <article
+        aria-labelledby={`side-${project.slug}`}
+        className="grid gap-x-10 gap-y-5 sm:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[24rem_minmax(0,1fr)]"
+      >
+        <div className="media" data-reveal>
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? ""}
+              fill
+              sizes="(min-width: 1024px) 24rem, (min-width: 640px) 16rem, 100vw"
+            />
           ) : null}
-          {project.repo ? (
-            <a href={project.repo} target="_blank" rel="noopener noreferrer" aria-label={label("source code on GitHub")} className="link inline-flex min-h-11 items-center gap-2">
-              Source <span className="arrow" aria-hidden="true">→</span>
-            </a>
-          ) : null}
-        </p>
-      </div>
-    </article>
+        </div>
+        <div>
+          <h3 id={`side-${project.slug}`} className="row-title text-lead font-semibold" data-reveal style={d(80)}>
+            {project.title}
+          </h3>
+          <p className="mt-3 max-w-[60ch]" data-reveal style={d(140)}>
+            {project.summary}
+          </p>
+          <div className="mt-5">
+            <Stack items={project.stack} delay={200} />
+          </div>
+          <p className="mt-4 flex flex-wrap gap-x-8 font-semibold" data-reveal style={d(260)}>
+            {project.live ? (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={label("live demo")} className="link inline-flex min-h-11 items-center gap-2">
+                Live demo <span className="arrow" aria-hidden="true">→</span>
+              </a>
+            ) : null}
+            {project.repo ? (
+              <a href={project.repo} target="_blank" rel="noopener noreferrer" aria-label={label("source code on GitHub")} className="link inline-flex min-h-11 items-center gap-2">
+                Source <span className="arrow" aria-hidden="true">→</span>
+              </a>
+            ) : null}
+          </p>
+        </div>
+      </article>
+    </li>
   );
 }
 
 export function SideProjects() {
   return (
-    <section aria-labelledby="side-projects-title">
-      <div className="frame grid gap-6 pb-[clamp(3rem,6vw,5rem)] pt-[calc(var(--gap-section)/2)] lg:grid-cols-2 lg:items-end lg:pt-[var(--gap-section)]">
-        <h2 id="side-projects-title" className="text-title" data-reveal>
-          Side projects
-        </h2>
-        <p className="max-w-[40ch] text-lead" data-reveal style={{ "--d": "70ms" } as React.CSSProperties}>
-          Projects I build for fun, and to test out new tools before using them on client work.
-        </p>
-      </div>
-      {personal.map((project) => (
-        <SideProject key={project.slug} project={project} />
-      ))}
-    </section>
+    <Section
+      id="side-projects"
+      labelledBy="side-projects-title"
+      title="Side projects"
+      intro="Projects I build for fun, and to test out new tools before using them on client work."
+    >
+      <ul className="space-y-[clamp(3.5rem,6vw,5rem)]">
+        {personal.map((project) => (
+          <SideProject key={project.slug} project={project} />
+        ))}
+      </ul>
+    </Section>
   );
 }

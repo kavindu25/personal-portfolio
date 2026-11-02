@@ -1,58 +1,48 @@
 import { profile } from "../data/profile";
+import { LocalTime } from "./LocalTime";
+import { MaskText } from "./motion/MaskText";
 
-// The name is the page's title. On desktop it crosses the seam into the
-// stage; the part over the field is redrawn in the field's ink by a CSS
-// pseudo-element (globals.css), so the name exists once in the document.
-function Name() {
-  return (
-    <>
-      <span className="line">
-        <span data-line data-text="Kavindu" style={{ "--i": 0 } as React.CSSProperties}>
-          Kavindu
-        </span>
-      </span>
-      <span className="line">
-        <span data-line data-text="de Alwis" style={{ "--i": 1 } as React.CSSProperties}>
-          de Alwis
-        </span>
-      </span>
-    </>
-  );
-}
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
+// Who and what on the left, in two sizes; the summary and the two ways
+// forward on the right. Nothing else on the first screen.
 export function Hero() {
   return (
     <section
       id="top"
-      data-trace="all"
       aria-labelledby="top-title"
-      className="flex flex-col gap-10 px-[var(--m)] pb-16 pt-[calc(var(--bar)+2.5rem)] lg:min-h-svh lg:px-0 lg:pb-[calc(var(--m)+1rem)] lg:pt-[calc(var(--bar)+var(--m)+1.5rem)]"
+      className="frame pb-[clamp(3rem,6vw,5rem)] pt-[calc(var(--bar)+clamp(4rem,10vw,9rem))]"
     >
-      <div className="hero-name hero-name__scale">
-        <h1 id="top-title" className="lines text-display text-display-fit whitespace-nowrap">
-          <Name />
-        </h1>
-      </div>
+      <div className="grid gap-x-16 gap-y-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
+        <div>
+          <h1
+            id="top-title"
+            aria-label={profile.name}
+            className="text-[clamp(3.5rem,2rem+6vw,7.5rem)] leading-[0.9]"
+          >
+            <MaskText text="Kavindu" by="char" onLoad hidden className="block" />
+            <MaskText text="de Alwis" by="char" onLoad hidden start={7} className="block" />
+          </h1>
+          <p className="mt-8 max-w-[24ch] font-heading text-lead font-semibold tracking-[-0.015em]" data-load style={d(650)}>
+            {profile.headline}
+          </p>
+        </div>
 
-      <div className="max-w-[38rem]">
-        <p className="text-lead font-semibold" data-load style={{ "--d": "380ms" } as React.CSSProperties}>
-          {profile.headline}
-        </p>
-        <p className="mt-4" data-load style={{ "--d": "440ms" } as React.CSSProperties}>
-          {profile.summary} {profile.availability}.
-        </p>
-
-        <div
-          className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4"
-          data-load
-          style={{ "--d": "500ms" } as React.CSSProperties}
-        >
-          <a href="#contact" className="button">
-            Get in touch <span className="arrow" aria-hidden="true">→</span>
-          </a>
-          <a href={profile.cvPath} download className="link text-small font-semibold">
-            Download CV
-          </a>
+        <div data-load style={d(800)}>
+          <p className="max-w-[46ch]">
+            {profile.summary} {profile.availability}.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a href="#contact" className="button">
+              Get in touch <span className="arrow" aria-hidden="true">→</span>
+            </a>
+            <a href={profile.cvPath} download className="link font-semibold">
+              Download CV
+            </a>
+          </div>
+          <div className="mt-8 text-small text-ink-soft">
+            <LocalTime />
+          </div>
         </div>
       </div>
     </section>

@@ -4,8 +4,7 @@ import { Experience } from "./components/Experience";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import { Navbar } from "./components/Navbar";
-import { SelectedWork, SideProjects, professional } from "./components/SelectedWork";
-import { Stage } from "./components/Stage";
+import { SelectedWork, SideProjects } from "./components/SelectedWork";
 import { Writing } from "./components/Writing";
 import { Skills } from "./components/Skills";
 import { profile } from "./data/profile";
@@ -29,7 +28,8 @@ export default function Home() {
     <>
       <Navbar />
       <main id="main">
-        <Stage projects={professional} years="4 yrs in production" hero={<Hero />} work={<SelectedWork />} />
+        <Hero />
+        <SelectedWork />
         <SideProjects />
         <Experience />
         <Skills />

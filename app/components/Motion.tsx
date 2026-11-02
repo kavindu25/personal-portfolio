@@ -8,13 +8,13 @@ declare global {
   }
 }
 
-// Section parts marked data-reveal (and pictures marked data-shutter) rise
+// Section parts marked data-reveal, and headings marked data-mask, rise
 // once as they enter the viewport. CSS keeps them visible when script,
 // IntersectionObserver or motion are unavailable.
 export function Motion() {
   useEffect(() => {
     window.__reveal = true;
-    const targets = document.querySelectorAll<HTMLElement>("[data-reveal], [data-shutter]");
+    const targets = document.querySelectorAll<HTMLElement>("[data-reveal], [data-mask]");
 
     if (!("IntersectionObserver" in window)) {
       targets.forEach((el) => el.classList.add("is-in"));

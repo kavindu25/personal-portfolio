@@ -1,20 +1,12 @@
 import { capabilities } from "../data/capabilities";
+import { Section } from "./Section";
 
-// Text at one size: each group opens with its name in full weight, then a
-// tight stack of tools. No boxes, no chips.
+// One column per job, its tools listed down the column so each list reads
+// top to bottom at a glance.
 export function Skills() {
   return (
-    <section id="skills" aria-labelledby="skills-title" className="frame section-gap">
-      <div className="grid gap-4 lg:grid-cols-2 lg:items-end">
-        <h2 id="skills-title" className="text-title" data-reveal>
-          Skills
-        </h2>
-        <p className="max-w-[40ch] text-lead" data-reveal style={{ "--d": "70ms" } as React.CSSProperties}>
-          The tools I use day to day, grouped by the job they do.
-        </p>
-      </div>
-
-      <div className="mt-[clamp(3.5rem,7vw,6rem)] grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-5">
+    <Section id="skills" title="Skills" intro="The tools I use day to day, grouped by the job they do.">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[repeat(4,minmax(0,1fr))_minmax(0,1.2fr)]">
         {capabilities.map((group, i) => (
           <section
             key={group.slug}
@@ -22,10 +14,10 @@ export function Skills() {
             data-reveal
             style={{ "--d": `${i * 70}ms` } as React.CSSProperties}
           >
-            <h3 id={`skills-${group.slug}`} className="text-lead">
+            <h3 id={`skills-${group.slug}`} className="font-text text-body font-semibold tracking-normal text-ink-soft">
               {group.title}
             </h3>
-            <ul className="mt-4 space-y-1.5 text-lead leading-snug text-ink-soft">
+            <ul className="mt-4 space-y-1.5 font-heading text-lead font-medium tracking-[-0.01em] text-ink">
               {group.tools.map((tool) => (
                 <li key={tool}>{tool}</li>
               ))}
@@ -33,6 +25,6 @@ export function Skills() {
           </section>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

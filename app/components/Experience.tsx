@@ -1,122 +1,67 @@
 import { experience, type Role } from "../data/experience";
+import { MaskText } from "./motion/MaskText";
+import { Section } from "./Section";
+import { Stack } from "./Stack";
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
-/** "Nov 2024" as a month count; "present" as this month. */
-function toMonth(text: string, now: Date) {
-  const [month, year] = text.trim().split(" ");
-  const m = MONTHS.indexOf(month);
-  if (m === -1 || !year) return now.getUTCFullYear() * 12 + now.getUTCMonth();
-  return Number(year) * 12 + m;
-}
-
-function span(role: Role, now: Date) {
-  const [from, to] = role.period.split(" to ");
-  return { start: toMonth(from, now), end: toMonth(to ?? "present", now) + 1 };
-}
-
-// Every role on one axis, from the first role to today; this role is filled
-// in the accent, the others sit one tone off the panel.
-function Timeline({ role, now }: { role: Role; now: Date }) {
-  const roles = experience.flatMap((e) => e.roles);
-  const spans = roles.map((r) => span(r, now));
-  const first = Math.min(...spans.map((s) => s.start));
-  const last = Math.max(...spans.map((s) => s.end));
-  const total = last - first;
-  const pct = (m: number) => ((m - first) / total) * 100;
-  const startYear = Math.floor(first / 12) + 1;
-  const endYear = Math.floor((last - 1) / 12);
-  const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i);
-
+function RoleEntry({ role }: { role: Role }) {
   return (
-    <div aria-hidden="true">
-      <div className="relative h-14">
-        {roles.map((r, i) => {
-          const s = spans[i];
-          const mine = r === role;
-          return (
-            <span
-              key={r.title + r.period}
-              className={`absolute ${mine ? "inset-y-0 bg-accent" : "inset-y-4 bg-[color-mix(in_srgb,var(--ink)_14%,transparent)]"}`}
-              style={{ left: `${pct(s.start)}%`, width: `${Math.max(pct(s.end) - pct(s.start), 1.5)}%` }}
-            />
-          );
-        })}
-      </div>
-      <div className="relative mt-3 h-5 text-small tabular-nums text-ink-soft">
-        {years.map((y) => (
-          <span key={y} className="absolute -translate-x-1/2" style={{ left: `${pct(y * 12)}%` }}>
-            {String(y).slice(2).padStart(3, "’")}
-          </span>
+    <li className="relative">
+      <span className="track__dot" aria-hidden="true" />
+      <p className="text-small font-semibold tabular-nums text-ink-soft" data-reveal>
+        {role.period}
+      </p>
+      <h4 className="mt-1 text-lead" data-reveal style={d(60)}>
+        {role.title}
+      </h4>
+      <p className="mt-3 max-w-[62ch]" data-reveal style={d(120)}>
+        {role.summary}
+      </p>
+      <ul className="bullets mt-5" data-reveal style={d(180)}>
+        {role.highlights.map((item) => (
+          <li key={item}>{item}</li>
         ))}
-      </div>
-    </div>
-  );
-}
-
-function RoleModule({ role, now }: { role: Role; now: Date }) {
-  return (
-    <li className="grid gap-x-10 gap-y-6 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:items-start">
-      <div className="bg-surface p-6" data-reveal>
-        <p className="font-semibold tabular-nums">{role.period}</p>
-        <div className="mt-6">
-          <Timeline role={role} now={now} />
-        </div>
-      </div>
-
-      <div>
-        <h4 className="text-lead" data-reveal style={{ "--d": "70ms" } as React.CSSProperties}>
-          {role.title}
-        </h4>
-        <p className="mt-3 max-w-[62ch]" data-reveal style={{ "--d": "140ms" } as React.CSSProperties}>
-          {role.summary}
-        </p>
-        <ul className="bullets mt-5" data-reveal style={{ "--d": "210ms" } as React.CSSProperties}>
-          {role.highlights.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <p className="mt-5 max-w-[62ch] text-small text-ink-soft">
-          <span className="sr-only">Technologies used: </span>
-          {role.stack.join(", ")}
-        </p>
+      </ul>
+      <div className="mt-6">
+        <Stack items={role.stack} delay={240} />
       </div>
     </li>
   );
 }
 
+// The employer on the left; its roles hang off one track on the right that
+// fills with accent as they are read.
 export function Experience() {
-  const now = new Date();
   return (
-    <section id="experience" aria-labelledby="experience-title" className="frame section-gap">
-      <div className="mx-auto max-w-[72rem]">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:gap-x-10">
-          <h2 id="experience-title" className="text-title" data-reveal>
-            Experience
-          </h2>
-          <p className="text-lead md:self-end" data-reveal style={{ "--d": "70ms" } as React.CSSProperties}>
-            Four years shipping production software.
-          </p>
-        </div>
-
-        <div className="mt-[clamp(4rem,8vw,6rem)] space-y-[clamp(5rem,9vw,8rem)]">
-          {experience.map((employer) => (
-            <div key={employer.company}>
-              <h3 className="text-title" data-reveal>
-                <a href={employer.url} target="_blank" rel="noopener noreferrer" className="decoration-transparent underline-offset-[0.18em] hover:underline hover:decoration-current focus-visible:underline">
-                  {employer.company}
+    <Section id="experience" title="Experience" intro="Four years shipping production software.">
+      <div className="space-y-[clamp(7rem,10vw,8rem)]">
+        {experience.map((employer) => (
+          <div key={employer.company} className="grid gap-x-16 gap-y-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+            <div className="lg:sticky lg:top-[calc(var(--bar)+2rem)] lg:self-start">
+              <h3 className="text-[clamp(1.6rem,1.2rem+1.4vw,2.25rem)] leading-[1.1]">
+                <a
+                  href={employer.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${employer.company} (opens in a new tab)`}
+                  className="transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+                >
+                  <MaskText text={employer.company} hidden />
                 </a>
               </h3>
-              <p className="mt-2 text-small text-ink-soft">{employer.kind}</p>
-              <ol className="mt-10 space-y-[clamp(4rem,7vw,6rem)]">
-                {employer.roles.map((role) => (
-                  <RoleModule key={role.title} role={role} now={now} />
-                ))}
-              </ol>
+              <p className="mt-3 text-small text-ink-soft" data-reveal style={d(80)}>
+                {employer.kind}
+              </p>
             </div>
-          ))}
-        </div>
+            <ol className="track space-y-[clamp(3rem,5vw,4rem)]">
+              {employer.roles.map((role) => (
+                <RoleEntry key={role.title + role.period} role={role} />
+              ))}
+            </ol>
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }
