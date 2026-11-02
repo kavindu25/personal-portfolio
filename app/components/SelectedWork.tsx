@@ -1,98 +1,114 @@
 import Image from "next/image";
 import { projects, type Project } from "../data/projects";
+import { MaskText } from "./motion/MaskText";
 import { Section } from "./Section";
-import { StackList } from "./StackList";
+import { Stack } from "./Stack";
+
+const professional = projects.filter((p) => p.kind === "professional");
+const personal = projects.filter((p) => p.kind === "personal");
+
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 function CaseStudy({ project }: { project: Project }) {
   return (
-    <article className="border-t border-line py-9 first:border-t-0 first:pt-0">
-      <h3 className="text-heading">{project.title}</h3>
-      <p className="mt-1.5 text-meta text-ink-soft">{project.role}</p>
-      <p className="mt-4 max-w-[64ch] text-ink-2">{project.summary}</p>
-      {project.outcome ? (
-        <p className="mt-4 max-w-[64ch] border-l border-accent pl-4 font-medium text-ink">{project.outcome}</p>
-      ) : null}
-      <div className="mt-5">
-        <StackList stack={project.stack} />
+    <article
+      id={`case-${project.slug}`}
+      className="grid scroll-mt-32 gap-x-16 gap-y-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+    >
+      <div>
+        <MaskText as="h3" text={project.title} className="text-[clamp(1.6rem,1.2rem+1.4vw,2.25rem)] leading-[1.1]" />
+        <p className="mt-3 text-small text-ink-soft" data-reveal style={d(80)}>
+          {project.role}
+        </p>
       </div>
-    </article>
-  );
-}
-
-function SideProject({ project }: { project: Project }) {
-  return (
-    <article className="flex flex-col">
-      {project.image ? (
-        <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-line bg-surface">
-          <Image
-            src={project.image}
-            alt={project.imageAlt ?? ""}
-            fill
-            sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 90vw"
-            className="object-cover object-top"
-          />
+      <div>
+        <p className="max-w-[60ch]" data-reveal style={d(140)}>
+          {project.summary}
+        </p>
+        {project.outcome ? (
+          <p className="mt-5 max-w-[40ch] text-lead font-semibold text-accent" data-reveal style={d(200)}>
+            {project.outcome}
+          </p>
+        ) : null}
+        <div className="mt-6">
+          <Stack items={project.stack} delay={260} />
         </div>
-      ) : null}
-      <h4 className="mt-4 text-lead">{project.title}</h4>
-      <p className="mt-1.5 text-small text-ink-2">{project.summary}</p>
-      <div className="mt-3">
-        <StackList stack={project.stack} />
       </div>
-      <p className="mt-4 flex gap-5 text-small font-medium">
-        {project.live ? (
-          <a
-            href={project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${project.title}, live demo (opens in a new tab)`}
-            className="text-accent underline decoration-from-font underline-offset-4 hover:no-underline"
-          >
-            Live demo
-          </a>
-        ) : null}
-        {project.repo ? (
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${project.title}, source code on GitHub (opens in a new tab)`}
-            className="text-accent underline decoration-from-font underline-offset-4 hover:no-underline"
-          >
-            Source
-          </a>
-        ) : null}
-      </p>
     </article>
   );
 }
 
 export function SelectedWork() {
-  const professional = projects.filter((p) => p.kind === "professional");
-  const personal = projects.filter((p) => p.kind === "personal");
-
   return (
-    <Section
-      id="work"
-      title="Selected work"
-      intro="What I built, who it was for, and what changed because of it."
-    >
-      <div>
+    <Section id="work" title="Selected work" intro="What I built, who it was for, and what changed because of it.">
+      <div className="space-y-[clamp(7rem,9vw,8rem)]">
         {professional.map((project) => (
           <CaseStudy key={project.slug} project={project} />
         ))}
       </div>
+    </Section>
+  );
+}
 
-      <div className="mt-6 border-t border-line pt-12">
-        <h3 className="text-heading">Side projects</h3>
-        <p className="mt-2 max-w-[52ch] text-small text-ink-soft">
-          Projects I build for fun, and to test out new tools before using them on client work.
-        </p>
-        <div className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2">
-          {personal.map((project) => (
-            <SideProject key={project.slug} project={project} />
-          ))}
+function SideProject({ project }: { project: Project }) {
+  const label = (what: string) => `${project.title}, ${what} (opens in a new tab)`;
+  return (
+    <li className="row">
+      <article
+        aria-labelledby={`side-${project.slug}`}
+        className="grid gap-x-10 gap-y-5 sm:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[24rem_minmax(0,1fr)]"
+      >
+        <div className="media" data-reveal>
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? ""}
+              fill
+              sizes="(min-width: 1024px) 24rem, (min-width: 640px) 16rem, 100vw"
+            />
+          ) : null}
         </div>
-      </div>
+        <div>
+          <h3 id={`side-${project.slug}`} className="row-title text-lead font-semibold" data-reveal style={d(80)}>
+            {project.title}
+          </h3>
+          <p className="mt-3 max-w-[60ch]" data-reveal style={d(140)}>
+            {project.summary}
+          </p>
+          <div className="mt-5">
+            <Stack items={project.stack} delay={200} />
+          </div>
+          <p className="mt-4 flex flex-wrap gap-x-8 font-semibold" data-reveal style={d(260)}>
+            {project.live ? (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={label("live demo")} className="link inline-flex min-h-11 items-center gap-2">
+                Live demo <span className="arrow" aria-hidden="true">→</span>
+              </a>
+            ) : null}
+            {project.repo ? (
+              <a href={project.repo} target="_blank" rel="noopener noreferrer" aria-label={label("source code on GitHub")} className="link inline-flex min-h-11 items-center gap-2">
+                Source <span className="arrow" aria-hidden="true">→</span>
+              </a>
+            ) : null}
+          </p>
+        </div>
+      </article>
+    </li>
+  );
+}
+
+export function SideProjects() {
+  return (
+    <Section
+      id="side-projects"
+      labelledBy="side-projects-title"
+      title="Side projects"
+      intro="Projects I build for fun, and to test out new tools before using them on client work."
+    >
+      <ul className="space-y-[clamp(3.5rem,6vw,5rem)]">
+        {personal.map((project) => (
+          <SideProject key={project.slug} project={project} />
+        ))}
+      </ul>
     </Section>
   );
 }

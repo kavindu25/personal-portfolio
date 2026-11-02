@@ -3,7 +3,7 @@ import { profile } from "../data/profile";
 import { getMediumPosts, type Post } from "../lib/medium";
 import { Section } from "./Section";
 
-const link = "text-accent underline decoration-from-font underline-offset-4 hover:no-underline";
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 function formatDate(iso: string) {
   if (!iso) return "";
@@ -15,83 +15,83 @@ function formatDate(iso: string) {
   });
 }
 
-function PostCard({ post }: { post: Post }) {
+function PostRow({ post }: { post: Post }) {
   const meta = [formatDate(post.date), `${post.readingMinutes} min read`].filter(Boolean).join(", ");
-
   return (
-    <article className="group relative flex flex-col gap-5 rounded-md border border-line bg-surface p-4 transition-colors focus-within:border-accent hover:border-accent sm:flex-row sm:gap-6">
-      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden rounded-sm border border-line bg-page sm:w-60">
-        {post.image ? (
-          <Image
-            src={post.image}
-            alt=""
-            fill
-            sizes="(min-width: 640px) 240px, 90vw"
-            className="object-cover"
-          />
-        ) : null}
-      </div>
-
-      <div className="min-w-0 py-1">
-        <p className="text-meta tabular-nums text-ink-soft">{meta}</p>
-        <h3 className="mt-1.5 text-lead">
-          {/* The stretched ::after makes the whole card one link. */}
-          <a
-            href={post.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${post.title} (opens on Medium in a new tab)`}
-            className="after:absolute after:inset-0 focus-visible:outline-none"
-          >
-            {post.title}
-          </a>
-        </h3>
-        {post.excerpt ? <p className="mt-2 text-small text-ink-2">{post.excerpt}</p> : null}
-        {post.tags.length > 0 ? (
-          <ul className="mt-3 flex flex-wrap gap-2 text-meta" aria-label="Topics">
-            {post.tags.map((tag) => (
-              <li key={tag} className="rounded-sm border border-line px-2 py-0.5 text-ink-soft">
-                {tag}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </div>
-    </article>
+    <li className="row">
+      <article className="grid gap-x-10 gap-y-5 sm:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[24rem_minmax(0,1fr)]">
+        <div className="media" data-reveal>
+          {post.image ? (
+            <Image src={post.image} alt="" fill sizes="(min-width: 1024px) 24rem, (min-width: 640px) 16rem, 100vw" />
+          ) : null}
+        </div>
+        <div>
+          <p className="text-small text-ink-soft" data-reveal style={d(80)}>
+            {meta}
+          </p>
+          <h3 className="mt-2 max-w-[34ch] text-lead font-semibold" data-reveal style={d(120)}>
+            <a
+              href={post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${post.title} (opens on Medium in a new tab)`}
+              className="row-title"
+            >
+              {post.title}
+            </a>
+          </h3>
+          {post.excerpt ? (
+            <p className="mt-3 max-w-[60ch]" data-reveal style={d(180)}>
+              {post.excerpt}
+            </p>
+          ) : null}
+          {post.tags.length > 0 ? (
+            <p className="mt-4 text-small text-ink-soft" data-reveal style={d(240)}>
+              <span className="sr-only">Topics: </span>
+              {post.tags.join(", ")}
+            </p>
+          ) : null}
+        </div>
+      </article>
+    </li>
   );
 }
 
 export async function Writing() {
   const posts = await getMediumPosts(profile.mediumHandle);
 
+  const more = (
+    <p className="mt-5 font-semibold" data-reveal style={d(180)}>
+      <a
+        href={profile.links.medium}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Read everything on Medium (opens in a new tab)"
+        className="link inline-flex min-h-11 items-center gap-2 text-accent"
+      >
+        Read everything on Medium <span className="arrow" aria-hidden="true">→</span>
+      </a>
+    </p>
+  );
+
   return (
     <Section
       id="writing"
       title="Writing"
-      intro="Guides and notes from things I have built, published on Medium."
+      intro={
+        posts.length > 0
+          ? "Guides and notes from things I have built, published on Medium."
+          : "Guides and notes from things I have built. The latest posts could not be loaded right now."
+      }
+      aside={more}
     >
       {posts.length > 0 ? (
-        <>
-          <div className="space-y-5">
-            {posts.map((post) => (
-              <PostCard key={post.url} post={post} />
-            ))}
-          </div>
-          <p className="mt-8 text-small font-medium">
-            <a href={profile.links.medium} target="_blank" rel="noopener noreferrer" className={link}>
-              Read everything on Medium
-            </a>
-          </p>
-        </>
-      ) : (
-        <p className="max-w-[64ch] text-ink-2">
-          The latest posts could not be loaded right now.{" "}
-          <a href={profile.links.medium} target="_blank" rel="noopener noreferrer" className={link}>
-            Read them on Medium
-          </a>
-          .
-        </p>
-      )}
+        <ul className="space-y-[clamp(3.5rem,6vw,5rem)]">
+          {posts.map((post) => (
+            <PostRow key={post.url} post={post} />
+          ))}
+        </ul>
+      ) : null}
     </Section>
   );
 }

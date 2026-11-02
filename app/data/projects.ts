@@ -7,6 +7,8 @@ export type Project = {
   summary: string;
   /** The result, preferably with a number. Professional projects only. */
   outcome?: string;
+  /** The client's field, shown beside the title. Professional projects only. */
+  sector?: string;
   stack: string[];
   image?: string;
   imageAlt?: string;
@@ -23,6 +25,7 @@ export const projects: Project[] = [
     summary:
       "Automates mortgage applications for brokers. OCR extracts data from customer documents and OpenAI models structure it, while the documents themselves sit in AWS S3 and are retrieved through presigned URLs.",
     outcome: "Cut manual effort for brokers by 60%.",
+    sector: "Fintech",
     stack: ["OCR", "OpenAI LLMs", "AWS S3"],
   },
   {
@@ -34,6 +37,7 @@ export const projects: Project[] = [
       "Cross-platform mobile app built in React Native. I built core features, API integrations and state management, plus the subscription workflows and in-app purchases through RevenueCat.",
     outcome:
       "Shipped subscription workflows and in-app purchases across platforms from a single React Native codebase.",
+    sector: "Health",
     stack: ["React Native", "RevenueCat"],
   },
   {
@@ -44,6 +48,7 @@ export const projects: Project[] = [
     summary:
       "Planning system for manufacturing processes. I built its core modules in Django.",
     outcome: "Improved operational efficiency for manufacturing processes.",
+    sector: "Manufacturing",
     stack: ["Django"],
   },
   {
@@ -54,6 +59,7 @@ export const projects: Project[] = [
     summary:
       "Web platform that shows US pharmacy owners detailed drug reimbursement insights. I built a filterable price comparison dashboard covering 100+ drugs across 5+ insurance plans, a CSV parser for analysed plan data, and secure S3 storage for uploaded files.",
     outcome: "Cut manual data handling by 70%.",
+    sector: "Pharmacy",
     stack: ["Django", "JavaScript", "Bootstrap CSS", "AWS S3"],
   },
   // {
@@ -92,7 +98,7 @@ export const projects: Project[] = [
     stack: ["React", "Vite", "Chrome extension"],
     image: "/images/projects/clipbase.png",
     imageAlt: "Clipbase side panel showing saved highlights, notes and collections",
-    repo: "https://github.com/kavindu25/YOUR-REPO-NAME",
+    repo: "https://github.com/kavindu25/research-annotator",
     live: "https://chromewebstore.google.com/detail/lphhcanodpheoafbgkeclblimkldfjmh?utm_source=item-share-cb",
   },
   {

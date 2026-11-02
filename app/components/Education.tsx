@@ -4,14 +4,17 @@ import { Section } from "./Section";
 export function Education() {
   return (
     <Section id="education" title="Education">
-      <ul className="space-y-7">
-        {education.map((item) => (
-          <li key={item.title} className="flex flex-wrap items-baseline justify-between gap-x-6">
-            <div className="max-w-[52ch]">
-              <h3 className="text-lead">{item.title}</h3>
-              <p className="mt-1 text-small text-ink-2">{item.institution}</p>
-            </div>
-            <p className="text-meta tabular-nums text-ink-soft">{item.year}</p>
+      <ul className="space-y-12">
+        {education.map((item, i) => (
+          <li
+            key={item.title}
+            className="grid gap-x-10 gap-y-1 sm:grid-cols-[10rem_minmax(0,1fr)] lg:grid-cols-[10rem_minmax(0,6fr)_minmax(0,5fr)]"
+            data-reveal
+            style={{ "--d": `${i * 80}ms` } as React.CSSProperties}
+          >
+            <p className="font-semibold tabular-nums">{item.year}</p>
+            <h3 className="text-lead">{item.title}</h3>
+            <p className="max-w-[44ch] text-ink-soft sm:col-start-2 lg:col-start-3 lg:pt-1">{item.institution}</p>
           </li>
         ))}
       </ul>

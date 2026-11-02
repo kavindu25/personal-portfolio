@@ -1,11 +1,10 @@
-import { Atkinson_Hyperlegible_Mono, Atkinson_Hyperlegible_Next, Funnel_Display } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, Funnel_Display } from "next/font/google";
 
 // The only place typefaces are chosen. To swap one, change the import and the
 // call below; the CSS variable names stay the same, so nothing else moves.
 //
-//   heading: h1-h4 and anything using `font-heading`
-//   text:    body copy, bullets, dates, chips, nav, buttons, form fields
-//   mono:    the hero trace only
+//   heading: the name, h1-h4 and anything using `font-heading`
+//   text:    body copy, the request trace, dates, nav, buttons, form fields
 const heading = Funnel_Display({
   subsets: ["latin"],
   variable: "--font-heading-face",
@@ -18,10 +17,4 @@ const text = Atkinson_Hyperlegible_Next({
   display: "swap",
 });
 
-const mono = Atkinson_Hyperlegible_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono-face",
-  display: "swap",
-});
-
-export const fontVariables = `${heading.variable} ${text.variable} ${mono.variable}`;
+export const fontVariables = `${heading.variable} ${text.variable}`;

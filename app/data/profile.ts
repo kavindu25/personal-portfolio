@@ -26,11 +26,3 @@ export const profile = {
   },
 } as const;
 
-// Rendered in the hero trace: one row per layer of the stack worked across.
-// `start` and `span` are percentages of the track; they only draw the bars.
-export const trace = [
-  { layer: "browser", detail: "React, React Native, Next.js", start: 0, span: 34 },
-  { layer: "api", detail: "Node.js, Django, Express", start: 18, span: 40 },
-  { layer: "data", detail: "PostgreSQL, MongoDB, MySQL", start: 42, span: 30 },
-  { layer: "infra", detail: "Docker, Linux, AWS", start: 60, span: 40 },
-] as const;

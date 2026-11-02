@@ -1,5 +1,6 @@
 import { profile } from "../data/profile";
 import { ContactForm } from "./ContactForm";
+import { ScrollWords } from "./motion/ScrollWords";
 import { Section } from "./Section";
 
 type Option = {
@@ -17,71 +18,60 @@ const options: Option[] = [
   { title: "CV", value: "Download as PDF", href: profile.cvPath, download: true },
 ];
 
-function ContactCard({ option }: { option: Option }) {
-  return (
-    <a
-      href={option.href}
-      {...(option.external
-        ? { target: "_blank", rel: "noopener noreferrer", "aria-label": `${option.title}: ${option.value} (opens in a new tab)` }
-        : {})}
-      {...(option.download ? { download: true } : {})}
-      className="group flex items-start justify-between gap-4 rounded-md border border-line bg-surface p-5 transition-colors hover:border-accent"
-    >
-      <span className="min-w-0">
-        <span className="block font-heading text-lead font-semibold tracking-tight text-ink">
-          {option.title}
-        </span>
-        <span className="mt-1 block break-words text-small text-ink-2">{option.value}</span>
-      </span>
-      <svg
-        viewBox="0 0 24 24"
-        width="20"
-        height="20"
-        aria-hidden="true"
-        className="mt-1 shrink-0 text-ink-soft transition-colors group-hover:text-accent"
-      >
-        <path
-          d={option.download ? "M12 4v11m0 0-4-4m4 4 4-4M5 20h14" : "M7 17 17 7M9 7h8v8"}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </a>
-  );
-}
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
+// The ask, read word by word, then the facts a recruiter needs, the ways to
+// reach me and the form. No card around any of it.
 export function Contact() {
-  return (
-    <Section id="contact" title="Contact">
-      <p className="max-w-[48ch] text-heading font-medium text-ink">
-        Hiring an engineer who can own a product from interface to deployment? Tell me about the team and what you need to ship.
-      </p>
-      {/* <p className="mt-4 max-w-[60ch] text-ink-soft">{profile.roleNote}</p> */}
-
-      <dl className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-3">
+  const details = (
+    <>
+      <dl className="grid gap-y-4" data-reveal style={d(160)}>
         {profile.workDetails.map((item) => (
           <div key={item.label}>
-            <dt className="text-meta text-ink-soft">{item.label}</dt>
-            <dd className="mt-0.5 text-body font-medium text-ink">{item.value}</dd>
+            <dt className="text-small text-ink-soft">{item.label}</dt>
+            <dd className="font-semibold">{item.value}</dd>
           </div>
         ))}
       </dl>
-
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+      <ul className="mt-8 grid gap-x-6 gap-y-2 sm:grid-cols-2" data-reveal style={d(220)}>
         {options.map((option) => (
           <li key={option.title}>
-            <ContactCard option={option} />
+            <a
+              href={option.href}
+              {...(option.external
+                ? { target: "_blank", rel: "noopener noreferrer", "aria-label": `${option.title}: ${option.value} (opens in a new tab)` }
+                : {})}
+              {...(option.download ? { download: true } : {})}
+              className="flex min-h-11 flex-col justify-center"
+            >
+              <span className="flex items-center gap-2 font-semibold">
+                <span className="link">{option.title}</span>
+                <span className="arrow" aria-hidden="true">
+                  {option.download ? "↓" : "→"}
+                </span>
+              </span>
+              <span className="break-words text-small text-ink-soft">{option.value}</span>
+            </a>
           </li>
         ))}
       </ul>
+    </>
+  );
 
-      <div className="mt-14 max-w-xl">
-        <h3 className="text-lead">Send a message</h3>
-        <div className="mt-5">
-          <ContactForm />
+  return (
+    // The question across the top; the ways to reach me beside the form.
+    <Section id="contact" title="Contact">
+      <ScrollWords
+        text="Hiring an engineer who can own a product from interface to deployment? Tell me about the team and what you need to ship."
+        className="max-w-[56ch] font-heading text-lead font-medium leading-[1.25] tracking-[-0.015em]"
+      />
+      <div className="mt-[clamp(3rem,6vw,5rem)] grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div className="max-lg:order-last">{details}</div>
+        <div data-reveal>
+          <h3 className="text-lead">Send a message</h3>
+          <div className="mt-6">
+            <ContactForm />
+          </div>
         </div>
       </div>
     </Section>

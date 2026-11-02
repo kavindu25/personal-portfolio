@@ -3,104 +3,109 @@
 /* Design tokens. Light is the default; dark follows the OS until the
    visitor picks a theme with the toggle (stored as data-theme).
 
-   Text has three tones, strongest to quietest:
-     --ink       titles, key facts, outcomes
-     --ink-2     running text: summaries, bullets, descriptions
-     --ink-soft  supporting detail: dates, labels, chips, sub-bullets
-   Every pairing clears 4.5:1 on --page and --surface in both themes. */
+   One ground (--page), one ink (--ink), one accent (--accent). --surface is
+   one tone step off the ground and is used only for form fields and image
+   wells. --ink-soft is for secondary notes. Every text pairing clears 4.5:1
+   in both themes. */
 :root {
   --page: #f1f3f2;
-  --surface: #e6ebe9;
-  --line: #cdd5d2;
+  --surface: #e4e9e7;
   --ink: #0f1a22;
-  --ink-2: #33424c;
   --ink-soft: #4e5d67;
+  --ink-dim: color-mix(in srgb, var(--ink) 22%, transparent);
   --accent: #096570;
+  --accent-strong: #06474f;
   --accent-ink: #ffffff;
-  --signal: #d99a00;
   --danger: #b3261e;
-  --body-leading: 1.65;
+  --chip: color-mix(in oklab, var(--ink) 9%, var(--page));
+
+  --body-leading: 1.6;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --page: #0e151b;
-    --surface: #17212a;
-    --line: #2a3843;
+    --surface: #161f27;
     --ink: #f6f9fa;
-    --ink-2: #c3cfd6;
-    --ink-soft: #93a4ae;
+    --ink-soft: #a3b3bc;
     --accent: #4cc9d2;
+    --accent-strong: #8ae0e5;
     --accent-ink: #0e151b;
-    --signal: #f0b429;
     --danger: #ff9a8f;
-    --body-leading: 1.7;
+
+    --body-leading: 1.65;
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
   --page: #0e151b;
-  --surface: #17212a;
-  --line: #2a3843;
+  --surface: #161f27;
   --ink: #f6f9fa;
-  --ink-2: #c3cfd6;
-  --ink-soft: #93a4ae;
+  --ink-soft: #a3b3bc;
   --accent: #4cc9d2;
+  --accent-strong: #8ae0e5;
   --accent-ink: #0e151b;
-  --signal: #f0b429;
   --danger: #ff9a8f;
-  --body-leading: 1.7;
+
+  --body-leading: 1.65;
   color-scheme: dark;
+}
+
+:root {
+  /* The frame: one pair of outer margins, one section gap, one bar height. */
+  --m: clamp(1rem, 2.6vw, 2.5rem);
+  --gap-section: clamp(6rem, 10vw, 10rem);
+  --bar: 4.5rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --t-press: 140ms;
+  --t-hover: 200ms;
+  --t-ui: 260ms;
 }
 
 @theme inline {
   --color-page: var(--page);
   --color-surface: var(--surface);
-  --color-line: var(--line);
   --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
   --color-ink-soft: var(--ink-soft);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
-  --color-signal: var(--signal);
   --color-danger: var(--danger);
 
   /* Roles, not names. The faces themselves are chosen in app/fonts.ts. */
   --font-heading: var(--font-heading-face), ui-sans-serif, system-ui, sans-serif;
   --font-text: var(--font-text-face), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono-face), ui-monospace, monospace;
 
-  /* Type roles. Fluid between a 360px and a 1440px viewport; body never
-     drops below 17px. Use these instead of arbitrary sizes. */
-  --text-display: clamp(2.4rem, 1.6rem + 3.4vw, 4.25rem);
-  --text-display--line-height: 1.05;
-  --text-title: clamp(1.75rem, 1.45rem + 1.2vw, 2.4rem);
-  --text-title--line-height: 1.12;
-  --text-heading: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
-  --text-heading--line-height: 1.25;
-  --text-lead: clamp(1.125rem, 1.07rem + 0.3vw, 1.3rem);
-  --text-lead--line-height: 1.45;
-  --text-body: clamp(1.0625rem, 1.03rem + 0.15vw, 1.125rem);
+  /* Five sizes do all the work.
+     display: the name, top and bottom of the page
+     title:   section headings, case study titles
+     lead:    statements, role and project titles
+     body:    running text
+     small:   dates, stacks, labels, legal */
+  --text-display: clamp(4.25rem, 12.2vw, 13rem);
+  --text-display--line-height: 0.88;
+  --text-title: clamp(2.25rem, 1.4rem + 3vw, 4rem);
+  --text-title--line-height: 1;
+  --text-lead: clamp(1.3rem, 1.1rem + 0.7vw, 1.75rem);
+  --text-lead--line-height: 1.28;
+  --text-body: clamp(1.0625rem, 1.04rem + 0.1vw, 1.125rem);
   --text-body--line-height: var(--body-leading);
-  --text-small: 1rem;
-  --text-small--line-height: 1.55;
-  --text-meta: 0.9375rem;
-  --text-meta--line-height: 1.4;
-  --text-micro: 0.875rem;
-  --text-micro--line-height: 1.35;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.45;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: calc(var(--bar) + 1rem);
   }
 
   body {
     background: var(--page);
-    color: var(--ink-2);
+    color: var(--ink);
     font-family: var(--font-text);
     font-size: var(--text-body);
     line-height: var(--body-leading);
@@ -114,19 +119,16 @@
   h3,
   h4 {
     font-family: var(--font-heading);
-    color: var(--ink);
-    letter-spacing: -0.01em;
+    color: inherit;
+    letter-spacing: -0.02em;
     text-wrap: balance;
+    font-weight: 600;
   }
 
   h1,
   h2 {
     font-weight: 650;
-  }
-
-  h3,
-  h4 {
-    font-weight: 600;
+    letter-spacing: -0.035em;
   }
 
   p,
@@ -137,7 +139,6 @@
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 2px;
   }
 
   ::selection {
@@ -146,14 +147,71 @@
   }
 }
 
+/* Lenis: the library's own required rules. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 @layer components {
-  /* Bulleted copy. A bullet nested under another reads one tone and one
-     size quieter, with a hollow marker, so child never matches parent. */
+  /* One centred container for everything, 72rem of content between two
+     equal margins. Display type sizes against it (cqi). */
+  .frame {
+    width: 100%;
+    max-width: calc(72rem + 2 * var(--m));
+    margin-inline: auto;
+    padding-inline: var(--m);
+    container-type: inline-size;
+  }
+
+  /* Every section: heading and intro on top, content below at full width. */
+  .chapter {
+    padding-block: calc(var(--gap-section) / 2);
+  }
+
+  /* Technologies: a filled square chip, one tone step off the ground. */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.3rem 0.75rem;
+    background: var(--chip);
+    color: var(--ink);
+    font-size: var(--text-small);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  /* Screenshots in the side project and post rows. */
+  .media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: clip;
+    background: var(--surface);
+  }
+
+  .media img {
+    object-fit: cover;
+    object-position: top;
+    transition: scale 900ms var(--ease-expo);
+  }
+
   .bullets {
     list-style: disc;
     padding-left: 1.25rem;
-    max-inline-size: 64ch;
-    color: var(--ink-2);
+    max-inline-size: 62ch;
   }
 
   .bullets > li {
@@ -161,66 +219,296 @@
   }
 
   .bullets > li + li {
-    margin-top: 0.75rem;
+    margin-top: 0.6rem;
   }
 
   .bullets li::marker {
     color: var(--accent);
   }
 
-  .bullets ul,
-  .bullets ol {
-    list-style: circle;
-    margin-top: 0.5rem;
-    padding-left: 1.25rem;
-    font-size: var(--text-small);
-    line-height: var(--text-small--line-height);
-    color: var(--ink-soft);
+  /* One button shape for the whole page: square, flat, one fill. */
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.5rem;
+    padding-inline: 1.75rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 600;
+    transition:
+      transform var(--t-press) var(--ease-out),
+      background-color var(--t-hover) ease;
   }
 
-  .bullets ul > li + li,
-  .bullets ol > li + li {
-    margin-top: 0.375rem;
+  .button:active {
+    transform: scale(0.97);
+  }
+
+  /* Text links: a quiet underline that firms up and settles on hover. */
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.3em;
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+    transition:
+      text-decoration-color var(--t-hover) ease,
+      text-underline-offset var(--t-ui) var(--ease-out),
+      color var(--t-hover) ease;
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform var(--t-ui) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .button:hover {
+      background: var(--accent-strong);
+    }
+
+    .link:hover {
+      text-decoration-color: currentColor;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover > .arrow,
+    button:hover > .arrow {
+      transform: translateX(0.3rem);
+    }
+  }
+
+  .link:focus-visible {
+    text-decoration-color: currentColor;
+  }
+
+  a:focus-visible > .arrow {
+    transform: translateX(0.3rem);
   }
 }
 
-/* The one orchestrated moment: the hero trace draws in once, then rests. */
-@keyframes trace-draw {
+/* ---------------------------------------------------------------------------
+   Masked words. Each word sits in a clipping box and rises into it.
+   ------------------------------------------------------------------------- */
+.mask {
+  display: inline-block;
+  overflow: clip;
+  overflow-clip-margin: 0.04em;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.mask > span {
+  display: inline-block;
+}
+
+/* The footer name fills the container: two lines on a phone, one on desktop. */
+@media (max-width: 639px) {
+  .text-display-fit {
+    font-size: 22cqi;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-display-fit {
+    font-size: 12.6cqi;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Experience: one track down the side of the roles, filled as you read.
+   ------------------------------------------------------------------------- */
+.track {
+  position: relative;
+  padding-left: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+.track::before,
+.track::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--surface);
+}
+
+.track::after {
+  background: var(--accent);
+  transform-origin: top;
+}
+
+.track__dot {
+  position: absolute;
+  left: calc(-1 * clamp(1.75rem, 3vw, 2.75rem) - 5px);
+  top: 0.45em;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--page);
+  border: 2px solid var(--accent);
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   Rows (side projects, posts): the title takes the accent, the picture
+   leans in a little.
+   ------------------------------------------------------------------------- */
+.row-title {
+  transition: color var(--t-hover) ease;
+}
+
+.row:hover .row-title,
+.row:focus-within .row-title {
+  color: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .row:hover .media img {
+    scale: 1.035;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Navigation: hides while reading down, returns on the way up.
+   ------------------------------------------------------------------------- */
+.bar {
+  transition: transform 420ms var(--ease-out);
+}
+
+.bar[data-hidden] {
+  transform: translateY(-100%);
+}
+
+/* ---------------------------------------------------------------------------
+   Motion. Everything is painted on the first frame; these rules only add
+   arrival. [data-js] is set before paint by the inline script in layout.tsx,
+   so without script nothing is ever hidden. Reduced motion keeps the
+   finished state.
+   ------------------------------------------------------------------------- */
+@keyframes rise-in {
   from {
-    transform: scaleX(0);
+    transform: translateY(108%);
   }
   to {
-    transform: scaleX(1);
+    transform: none;
   }
 }
 
-@keyframes trace-fade {
+@keyframes fade-up {
   from {
     opacity: 0;
+    transform: translateY(16px);
   }
   to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Load: the name's letters rise one after another, then the rest. */
+  :root[data-js] [data-load-mask] .mask > span {
+    animation: rise-in 1100ms var(--ease-expo) both;
+    animation-delay: calc(100ms + var(--i, 0) * 38ms);
+  }
+
+  :root[data-js] [data-load] {
+    animation: fade-up 800ms var(--ease-out) both;
+    animation-delay: var(--d, 600ms);
+  }
+
+  /* Section parts rise once as they arrive. On a phone they only rise: a
+     fast flick never lands on content that is still invisible. */
+  :root[data-js] [data-reveal] {
+    transition:
+      opacity 900ms var(--ease-out),
+      transform 1100ms var(--ease-expo);
+    transition-delay: var(--d, 0ms);
+  }
+
+  :root[data-js] [data-reveal]:not(.is-in) {
+    transform: translateY(20px);
+  }
+
+  /* Words of a heading rise through their masks, one after another. */
+  :root[data-js] [data-mask] .mask > span {
+    transition:
+      transform 1100ms var(--ease-expo),
+      opacity 500ms var(--ease-out);
+    transition-delay: calc(var(--d, 0ms) + var(--i, 0) * 45ms);
+  }
+
+  /* Words of a statement start dim; ScrollWords lights them as you read. */
+  :root[data-js] .words > span {
+    color: var(--ink-dim);
+    transition: color 280ms ease;
+  }
+
+  :root[data-js] .words > span[data-lit] {
+    color: inherit;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 640px) {
+  :root[data-js] [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+
+  /* A picture settles into its frame as it arrives. */
+  :root[data-js] .media[data-reveal]:not(.is-in) img {
+    scale: 1.12;
+  }
+
+  :root[data-js] [data-mask]:not(.is-in) .mask > span {
+    opacity: 0;
+    transform: translateY(108%);
+  }
+}
+
+/* Scroll-linked moves, where the browser supports scroll timelines. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .track::after {
+      animation: fill linear both;
+      animation-timeline: view();
+      animation-range: entry 30% exit 70%;
+    }
+
+    .footer-name {
+      animation: name-arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes name-arrive {
+  from {
+    transform: translateY(18%);
+    opacity: 0.2;
+  }
+  to {
+    transform: none;
     opacity: 1;
   }
 }
 
-.trace-bar {
-  transform-origin: left center;
-  animation: trace-draw 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(250ms + var(--i) * 140ms);
-}
-
-.trace-total {
-  animation: trace-fade 400ms ease-out both;
-  animation-delay: 1000ms;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .trace-bar,
-  .trace-total {
-    animation: none;
+  .media img {
+    transition: none;
   }
 }
