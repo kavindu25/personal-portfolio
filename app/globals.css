@@ -18,6 +18,7 @@
   --accent-ink: #ffffff;
   --danger: #b3261e;
   --chip: color-mix(in oklab, var(--ink) 9%, var(--page));
+  --track: color-mix(in oklab, var(--ink) 10%, var(--surface));
 
   --body-leading: 1.6;
   color-scheme: light;
@@ -56,7 +57,7 @@
 :root {
   /* The frame: one pair of outer margins, one section gap, one bar height. */
   --m: clamp(1rem, 2.6vw, 2.5rem);
-  --gap-section: clamp(6rem, 10vw, 10rem);
+  --gap-section: clamp(7.5rem, 9vw, 9rem);
   --bar: 4.5rem;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -353,6 +354,39 @@ html.lenis body {
   z-index: 1;
 }
 
+/* The current role: the dot is filled, and a ring keeps leaving it, slowly,
+   to say the work is still going on. */
+.track__dot--now {
+  background: var(--accent);
+}
+
+.track__dot--now::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 2px solid var(--accent);
+  opacity: 0;
+}
+
+@keyframes dot-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track__dot--now::after {
+    animation: dot-pulse 2600ms var(--ease-out) infinite;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Rows (side projects, posts): the title takes the accent, the picture
    leans in a little.
@@ -510,5 +544,92 @@ html.lenis body {
 @media (prefers-reduced-motion: reduce) {
   .media img {
     transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The hero trace. One request travels through the stack: the bars draw in
+   waterfall order after the name lands, the response (200 and the total)
+   arrives last, then a short packet keeps moving from browser to infra.
+   ------------------------------------------------------------------------- */
+.trace-track {
+  background: var(--track);
+}
+
+.trace-bar {
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--start) * 1%);
+  width: calc(var(--span) * 1%);
+  overflow: hidden;
+  background: var(--accent);
+  transform-origin: left center;
+  transition: background-color var(--t-hover) ease;
+}
+
+.trace-bar::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 28%;
+  background: color-mix(in oklab, var(--page) 45%, transparent);
+  transform: translateX(-110%);
+}
+
+.trace-detail {
+  transition: color var(--t-hover) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trace-row:hover .trace-bar {
+    background: var(--accent-strong);
+  }
+
+  .trace-row:hover .trace-detail {
+    color: var(--ink);
+  }
+}
+
+@keyframes trace-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* The packet crosses its bar in the first part of a shared cycle, so the
+   per-row offset reads as one request moving down the stack. */
+@keyframes trace-pulse {
+  0% {
+    transform: translateX(-110%);
+  }
+  22%,
+  100% {
+    transform: translateX(380%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-js] .trace-bar {
+    animation: trace-draw 700ms var(--ease-expo) both;
+    animation-delay: calc(1100ms + var(--i, 0) * 220ms);
+  }
+
+  :root[data-js] .trace-bar::after {
+    animation: trace-pulse 4800ms var(--ease-in-out) infinite both;
+    animation-delay: calc(2600ms + var(--i, 0) * 450ms);
+  }
+
+  :root[data-js] .trace-detail {
+    animation: fade-up 700ms var(--ease-out) both;
+    animation-delay: calc(1220ms + var(--i, 0) * 220ms);
+  }
+
+  :root[data-js] .trace-response {
+    animation: fade-up 700ms var(--ease-out) both;
+    animation-delay: 2100ms;
   }
 }

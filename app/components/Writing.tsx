@@ -60,14 +60,19 @@ function PostRow({ post }: { post: Post }) {
 export async function Writing() {
   const posts = await getMediumPosts(profile.mediumHandle);
 
+  // Closes the list: under the latest post's text, the way to all of them.
   const more = (
-    <p className="mt-5 font-semibold" data-reveal style={d(180)}>
+    <p
+      className={`${posts.length > 0 ? "mt-8 sm:pl-[calc(16rem+2.5rem)] lg:pl-[calc(24rem+2.5rem)] " : ""}font-semibold`}
+      data-reveal
+      style={d(120)}
+    >
       <a
         href={profile.links.medium}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Read everything on Medium (opens in a new tab)"
-        className="link inline-flex min-h-11 items-center gap-2 text-accent"
+        className="link inline-flex min-h-11 items-center gap-2"
       >
         Read everything on Medium <span className="arrow" aria-hidden="true">→</span>
       </a>
@@ -83,7 +88,6 @@ export async function Writing() {
           ? "Guides and notes from things I have built, published on Medium."
           : "Guides and notes from things I have built. The latest posts could not be loaded right now."
       }
-      aside={more}
     >
       {posts.length > 0 ? (
         <ul className="space-y-[clamp(3.5rem,6vw,5rem)]">
@@ -92,6 +96,7 @@ export async function Writing() {
           ))}
         </ul>
       ) : null}
+      {more}
     </Section>
   );
 }

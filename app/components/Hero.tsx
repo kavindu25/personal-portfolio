@@ -1,19 +1,20 @@
 import { profile } from "../data/profile";
+import { HeroTrace } from "./HeroTrace";
 import { LocalTime } from "./LocalTime";
 import { MaskText } from "./motion/MaskText";
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
-// Who and what on the left, in two sizes; the summary and the two ways
-// forward on the right. Nothing else on the first screen.
+// Who, what and the two ways forward on the left, in reading order; the
+// request trace on the right shows the whole stack I work across.
 export function Hero() {
   return (
     <section
       id="top"
       aria-labelledby="top-title"
-      className="frame pb-[clamp(3rem,6vw,5rem)] pt-[calc(var(--bar)+clamp(4rem,10vw,9rem))]"
+      className="frame pb-[clamp(3rem,6vw,5rem)] pt-[calc(var(--bar)+clamp(3.5rem,8vw,7rem))]"
     >
-      <div className="grid gap-x-16 gap-y-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
+      <div className="grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center">
         <div>
           <h1
             id="top-title"
@@ -26,13 +27,10 @@ export function Hero() {
           <p className="mt-8 max-w-[24ch] font-heading text-lead font-semibold tracking-[-0.015em]" data-load style={d(650)}>
             {profile.headline}
           </p>
-        </div>
-
-        <div data-load style={d(800)}>
-          <p className="max-w-[46ch]">
+          <p className="mt-6 max-w-[46ch]" data-load style={d(750)}>
             {profile.summary} {profile.availability}.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4" data-load style={d(850)}>
             <a href="#contact" className="button">
               Get in touch <span className="arrow" aria-hidden="true">→</span>
             </a>
@@ -40,10 +38,12 @@ export function Hero() {
               Download CV
             </a>
           </div>
-          <div className="mt-8 text-small text-ink-soft">
+          <div className="mt-8 text-small text-ink-soft" data-load style={d(850)}>
             <LocalTime />
           </div>
         </div>
+
+        <HeroTrace />
       </div>
     </section>
   );

@@ -6,9 +6,11 @@ import { Stack } from "./Stack";
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 function RoleEntry({ role }: { role: Role }) {
+  // The role I hold now gets a filled dot that keeps a slow pulse going.
+  const current = /present$/i.test(role.period);
   return (
     <li className="relative">
-      <span className="track__dot" aria-hidden="true" />
+      <span className={current ? "track__dot track__dot--now" : "track__dot"} aria-hidden="true" />
       <p className="text-small font-semibold tabular-nums text-ink-soft" data-reveal>
         {role.period}
       </p>
@@ -35,7 +37,7 @@ function RoleEntry({ role }: { role: Role }) {
 export function Experience() {
   return (
     <Section id="experience" title="Experience" intro="Four years shipping production software.">
-      <div className="space-y-[clamp(7rem,10vw,8rem)]">
+      <div className="space-y-[clamp(7rem,10vw,8rem)] lg:space-y-24">
         {experience.map((employer) => (
           <div key={employer.company} className="grid gap-x-16 gap-y-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
             <div className="lg:sticky lg:top-[calc(var(--bar)+2rem)] lg:self-start">

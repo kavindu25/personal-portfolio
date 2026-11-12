@@ -32,7 +32,7 @@ Placeholders are marked `[TODO ...]`. List what is left with `npm run todos`.
 
 Colours are CSS variables in `app/globals.css`. Light is the default, dark follows the OS, and the toggle in the nav stores the visitor's choice.
 
-Running text is set in the full ink (`--ink`); `--ink-soft` is for secondary notes such as dates, stacks and labels. Motion lives in `app/components/motion/` (Lenis smooth scrolling, masked heading reveals, word-by-word statements, pictures settling into their frames) and in the motion block of `globals.css`; all of it is switched off for reduced motion.
+Running text is set in the full ink (`--ink`); `--ink-soft` is for secondary notes such as dates, stacks and labels. Motion lives in `app/components/motion/` (Lenis smooth scrolling, masked heading reveals, word-by-word statements, pictures settling into their frames, the hero request trace drawing in across the stack) and in the motion block of `globals.css`; all of it is switched off for reduced motion.
 
 ## Typography
 

@@ -12,9 +12,9 @@ export function Education() {
             data-reveal
             style={{ "--d": `${i * 80}ms` } as React.CSSProperties}
           >
-            <p className="font-semibold tabular-nums">{item.year}</p>
-            <h3 className="text-lead">{item.title}</h3>
-            <p className="max-w-[44ch] text-ink-soft sm:col-start-2 lg:col-start-3 lg:pt-1">{item.institution}</p>
+            <p className="font-semibold tabular-nums lg:pt-1.5">{item.year}</p>
+            <h3 className="text-[clamp(1.6rem,1.2rem+1.4vw,2.25rem)] leading-[1.1]">{item.title}</h3>
+            <p className="max-w-[44ch] text-ink-soft sm:col-start-2 lg:col-start-3 lg:pt-1.5">{item.institution}</p>
           </li>
         ))}
       </ul>

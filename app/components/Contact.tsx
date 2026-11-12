@@ -1,6 +1,5 @@
 import { profile } from "../data/profile";
 import { ContactForm } from "./ContactForm";
-import { ScrollWords } from "./motion/ScrollWords";
 import { Section } from "./Section";
 
 type Option = {
@@ -20,7 +19,7 @@ const options: Option[] = [
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
-// The ask, read word by word, then the facts a recruiter needs, the ways to
+// The ask beside the heading, then the facts a recruiter needs, the ways to
 // reach me and the form. No card around any of it.
 export function Contact() {
   const details = (
@@ -59,13 +58,14 @@ export function Contact() {
   );
 
   return (
-    // The question across the top; the ways to reach me beside the form.
-    <Section id="contact" title="Contact">
-      <ScrollWords
-        text="Hiring an engineer who can own a product from interface to deployment? Tell me about the team and what you need to ship."
-        className="max-w-[56ch] font-heading text-lead font-medium leading-[1.25] tracking-[-0.015em]"
-      />
-      <div className="mt-[clamp(3rem,6vw,5rem)] grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+    // The question sits across from the heading, as every section's
+    // introduction does; the ways to reach me sit beside the form below.
+    <Section
+      id="contact"
+      title="Contact"
+      intro="Hiring an engineer who can own a product from interface to deployment? Tell me about the team and what you need to ship."
+    >
+      <div className="grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <div className="max-lg:order-last">{details}</div>
         <div data-reveal>
           <h3 className="text-lead">Send a message</h3>
