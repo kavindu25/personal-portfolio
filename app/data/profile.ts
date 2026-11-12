@@ -8,7 +8,7 @@ export const profile = {
   cvPath: "/Kavindu_de_Alwis_SSE.pdf",
   headline: "Full stack engineer who owns web products front to back.",
   summary:
-    "Software engineer at Skaleminds with four years in production, from React and Next.js front ends to Node.js APIs, databases and Docker deployments. I take features from the first design discussion to production.",
+    "Software engineer with four years in production, from React and Next.js front ends to Node.js APIs, databases and Docker deployments. I take features from the first design discussion to production.",
   availability: "Open to new opportunities",
   roleNote: "I am a software engineer at Skaleminds and open to new opportunities.",
   // Shown as label/value pairs in the Contact section.
