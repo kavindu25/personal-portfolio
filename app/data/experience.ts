@@ -65,7 +65,7 @@ export const experience: Employer[] = [
         period: "Oct 2021 to Sep 2022",
         summary: "Gained foundational experience in full-stack development and UI design.",
         highlights: [
-          "Built responsive interfaces that give users seamless access to web applications across devices.",
+          "Built responsive interfaces that work on phones, tablets and desktops alike.",
           "Integrated backend services through REST APIs to exchange data and extend application features.",
           "Documented technical specifications and code base changes to improve maintainability and team collaboration.",
         ],
