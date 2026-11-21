@@ -20,7 +20,7 @@ const personJsonLd = {
   url: profile.siteUrl,
   email: profile.email,
   sameAs: [profile.links.github, profile.links.linkedin, profile.links.medium],
-  worksFor: { "@type": "Organization", name: "Skaleminds", url: "https://avantrio.xyz/" },
+  worksFor: { "@type": "Organization", name: "Skaleminds", url: "https://skaleminds.com/" },
 };
 
 export default function Home() {
