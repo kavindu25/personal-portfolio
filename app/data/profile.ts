@@ -1,7 +1,7 @@
 export const profile = {
   name: "Kavindu de Alwis",
   role: "Software engineer",
-  siteUrl: "https://kavindudealwis.dev", // [TODO] confirm production domain
+  siteUrl: "https://www.kavindu.xyz",
   email: "kavindudealwis@gmail.com",
   location: "Kesbewa, Sri Lanka",
   mediumHandle: "@kavindudealwis",
