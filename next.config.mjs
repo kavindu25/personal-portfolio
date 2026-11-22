@@ -36,6 +36,18 @@ const nextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  // The site used to live on its Vercel alias; send visitors and crawlers to
+  // the custom domain so search results move over. Preview URLs are untouched.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "personal-portfolio-psi-orcin.vercel.app" }],
+        destination: "https://www.kavindu.xyz/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
