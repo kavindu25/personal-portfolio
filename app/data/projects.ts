@@ -89,6 +89,18 @@ export const projects: Project[] = [
   //   live: "https://mern-book-store-app.vercel.app/",
   // },
   {
+    slug: "expense-tracker",
+    kind: "personal",
+    title: "Expense Tracker",
+    role: "Personal project",
+    summary:
+      "Offline mobile app that tracks bank accounts, credit cards, investment funds and spending, encrypted on the phone.",
+    stack: ["React Native", "Expo", "SQLite"],
+    image: "/images/projects/expenseTracker.png",
+    imageAlt: "Expense Tracker home screen showing net worth, monthly totals and upcoming card payments",
+    repo: "https://github.com/kavindu25/expense-tracker",
+  },
+  {
     slug: "clipbase",
     kind: "personal",
     title: "Clipbase",
